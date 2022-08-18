@@ -4,6 +4,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const moment = require('moment');
+const path = require('path');
+
 // Project-made Modules
 const hbs = require('./views/helpers/handlebarsHelper');
 
@@ -24,6 +26,21 @@ let PORT = process.env.PORT || 3000; // This uses the port from the configuratio
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.set('views', './views');
+
+// ====================================
+//             Middleware
+// ====================================
+
+// Body parser
+app.use(express.json()); //To use body parser for JSON
+app.use(
+	express.urlencoded({
+		extended: true,
+	})
+);
+
+// Static
+app.use(express.static(path.join(__dirname, '/public')));
 
 //=============================
 //           Routes
