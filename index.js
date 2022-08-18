@@ -50,6 +50,15 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use('/test', testRouter);
 app.use('/', mainRouter);
 
+// Error handling
+app.use(async (err, req, res, next) => {
+	console.log(err);
+	res.render('main/other/errorHandler', {
+		message: 'An error has occured',
+		err,
+	});
+});
+
 // ====================================
 //          Listening on ports
 // ====================================
