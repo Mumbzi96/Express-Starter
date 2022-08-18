@@ -43,6 +43,17 @@ app.use(
 	})
 );
 
+// Logging - Runs on every page visit
+app.use((req, res, next) => {
+	console.log(`Used a ${req.method} method on ${req.url} at ${moment()} `);
+	next();
+});
+
+//  Middleware
+const reqLog = (req, res, next) => {
+	console.log(req);
+};
+
 // Static
 app.use(express.static(path.join(__dirname, '/public')));
 
