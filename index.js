@@ -6,6 +6,10 @@ const dotenv = require('dotenv');
 const moment = require('moment');
 const path = require('path');
 
+// Routes
+const testRouter = require('./routes/testRouter');
+const mainRouter = require('./routes/mainRouter');
+
 // Project-made Modules
 const hbs = require('./views/helpers/handlebarsHelper');
 
@@ -42,12 +46,13 @@ app.use(
 // Static
 app.use(express.static(path.join(__dirname, '/public')));
 
-//=============================
-//           Routes
-//=============================
-app.get('/', (req, res) => {
-	res.render('main/home');
-});
+// Seperate Routes
+app.use('/test', testRouter);
+app.use('/', mainRouter);
+
+// ====================================
+//          Listening on ports
+// ====================================
 
 app.listen(7777, () => {
 	console.log(`Running on http://localhost:${PORT}`);
