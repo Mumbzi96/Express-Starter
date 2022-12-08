@@ -82,5 +82,5 @@ app.listen(PORT, () => {
 });
 
 // module.exports = { testRouter, mainRouter, hbs ,test:1};
-module.exports = testRouter;
+module.exports = testint=1;
 console.log("test npm i")
