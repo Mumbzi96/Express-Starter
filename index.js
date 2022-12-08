@@ -60,8 +60,8 @@ app.use(express.static(path.join(__dirname, "/public")));
 // Seperate Routes
 app.use("/test", testRouter);
 app.use("/", mainRouter);
-app.get("/update", (req,res,next)=>{
-	res.send('update')
+app.get("/update", (req, res, next) => {
+	res.send("update");
 });
 
 // Error handling
@@ -81,4 +81,4 @@ app.listen(PORT, () => {
 	console.log(`Running on http://localhost:${PORT}`);
 });
 
-module.exports = app;
+module.exports = { testRouter, mainRouter, hbs };
