@@ -81,4 +81,4 @@ app.listen(PORT, () => {
 	console.log(`Running on http://localhost:${PORT}`);
 });
 
-module.exports = { testRouter, mainRouter, hbs };
+module.exports = { testRouter, mainRouter, hbs ,test:1};
