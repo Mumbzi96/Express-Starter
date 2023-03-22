@@ -14,6 +14,8 @@ Well, forking is the best option, fork it and change the name and such things.
 
 # Run the project
 
+First things first, go to the project and add a config.env file in the config folder. This will also need to be filled with necessary data. The reason behind this is that config file is different for machines. For the current situation, all you need is to add a port like 3000 or 7777 or whatver.
+
 Two scripts are already added to run in the terminal:
 
 - `npm run start` which runs the project using `node index`
