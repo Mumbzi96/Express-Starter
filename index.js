@@ -81,6 +81,38 @@ app.use(async (err, req, res, next) => {
 //          Listening on ports
 // ====================================
 
-app.listen(PORT, () => {
-	console.log(`Running on http://localhost:${PORT}`);
-});
+const isHTTPS = process.env.IS_HTTPS;
+const isPFX = process.env.IS_PFX;
+const passphrase = process.env.PASSPHRASE;
+
+// http
+if (isHTTPS != "true")
+	app.listen(PORT, () => {
+		console.log(`Running on http://localhost:${PORT}`);
+	});
+
+// https
+// for certifications, either change the file locations below or create a folder "cert" and put the files there
+if (isHTTPS == "true") {
+	let sslServer;
+	if (isPFX != "true")
+		sslServer = https.createServer(
+			{
+				key: fs.readFileSync("./cert/privateKey.key"),
+				cert: fs.readFileSync("./cert/certificate.crt"),
+			},
+			app
+		);
+	else
+		sslServer = https.createServer(
+			{
+				pfx: fs.readFileSync("./cert/PFXFile.pfx"),
+				passphrase: passphrase,
+			},
+			app
+		);
+
+	sslServer.listen(PORT, () =>
+		console.log(`Listening on  https://localhost:${PORT}`)
+	);
+}
