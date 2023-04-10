@@ -5,13 +5,15 @@ const express = require("express");
 const dotenv = require("dotenv");
 const moment = require("moment");
 const path = require("path");
+const session = require("express-session");
 
 // Routes
 const testRouter = require("./routes/testRouter");
 const mainRouter = require("./routes/mainRouter");
 
 // Project-made Modules
-const hbs = require("./views/helpers/handlebarsHelper");
+const hbs = require("./views/helpers/handlebarsHelper"); // handlebars helper
+const sessionOptions = require("./helpers/sessionOptions");
 
 // ====================================
 //             Configuration
@@ -24,6 +26,8 @@ const app = express();
 dotenv.config({
 	path: "./config/config.env", // Specifies dotenv
 });
+
+// Port from env
 let PORT = process.env.PORT || 3000; // This uses the port from the configuration file or 3000 in case the file wasn't found
 
 //handlebars
@@ -34,6 +38,9 @@ app.set("views", "./views");
 // ====================================
 //             Middleware
 // ====================================
+
+// Sessions
+app.use(session(sessionOptions));
 
 // Body parser
 app.use(express.json()); //To use body parser for JSON
