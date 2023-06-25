@@ -12,7 +12,6 @@ const testRouter = require("./routes/testRouter");
 const mainRouter = require("./routes/mainRouter");
 
 // Project-made Modules
-const hbs = require("./views/helpers/handlebarsHelper"); // handlebars helper
 const sessionOptions = require("./helpers/sessionOptions");
 
 // ====================================
@@ -30,10 +29,6 @@ dotenv.config({
 // Port from env
 let PORT = process.env.PORT || 3000; // This uses the port from the configuration file or 3000 in case the file wasn't found
 
-//handlebars
-app.engine("handlebars", hbs.engine);
-app.set("view engine", "handlebars");
-app.set("views", "./views");
 
 // ====================================
 //             Middleware

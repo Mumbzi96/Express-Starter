@@ -9,7 +9,7 @@ const testRouter = express.Router();
 //========================
 
 testRouter.get('/', (req, res, next) => {
-	res.render('main/test/test');
+	res.send('Test router here!');
 });
 
 //========================
