@@ -1,24 +1,16 @@
 {
-  "name": "starter-sample-express",
-  "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "name": "express-starter",
+  "version": "1.0.0",
+  "description": "This repository will be used to simply not have to waste time on setting up a new Express project.\r It has the essentials packages (at least essential for me) with a few folder setups that I usually like to have.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index",
-    "dev": "nodemon index"
+    "dev": "concurrently \"cd server && npm run dev\" \" cd client && npm run dev\"",
+    "dev-server": "cd server && npm run dev",
+    "dev-client": "cd client && npm run dev",
+    "install-modules": "npm i && cd server && npm i && cd .. && cd client && npm i"
   },
-  "keywords": [
-    "Starter"
-  ],
   "author": "Omar Hammoud",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.0.1",
-    "express": "^4.18.1",
-    "express-session": "^1.17.3",
-    "memorystore": "^1.6.7",
-    "moment": "^2.29.4",
-    "nodemon": "^1.14.9"
+    "concurrently": "^8.2.0"
   }
 }
