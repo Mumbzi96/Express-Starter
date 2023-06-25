@@ -66,7 +66,7 @@ app.use("/", mainRouter);
 // Error handling
 app.use(async (err, req, res, next) => {
 	console.log(err);
-	res.render("main/other/errorHandler", {
+	res.send({
 		message: "An error has occured",
 		err,
 	});
