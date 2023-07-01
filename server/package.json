@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index",
-    "dev": "nodemon index"
+    "dev": "nodemon index",
+    "build": "esbuild index.js --bundle --platform=node --target=node14 --outdir=dist"
   },
   "keywords": [
     "Starter"
@@ -20,5 +21,8 @@
     "memorystore": "^1.6.7",
     "moment": "^2.29.4",
     "nodemon": "^1.14.9"
+  },
+  "devDependencies": {
+    "esbuild": "^0.18.11"
   }
 }

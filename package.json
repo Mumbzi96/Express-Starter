@@ -6,7 +6,10 @@
     "dev": "concurrently \"cd server && npm run dev\" \" cd client && npm run dev\"",
     "dev-server": "cd server && npm run dev",
     "dev-client": "cd client && npm run dev",
-    "install-modules": "npm i && cd server && npm i && cd .. && cd client && npm i"
+    "install-modules": "npm i && cd server && npm i && cd .. && cd client && npm i",
+    "build-server":"cd server && npm run build",
+    "build-client":"cd client && npm run build",
+    "build-full":"cd server && npm run build && cd.. && cd client && npm run build"
   },
   "author": "Omar Hammoud",
   "license": "ISC",
