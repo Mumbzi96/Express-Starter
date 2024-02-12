@@ -1,0 +1,575 @@
+<style>
+
+    /* ========== Home Section ========== */
+    .home-section-container{
+        overflow: hidden;
+        height: 100vh;
+        padding-top: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .sidebar ~ .home-section-container .usersContainer{
+        width: calc(100% - 172px);
+    }
+
+    .sidebar ~ .home-section-container .usersContainer{
+        transition: all 0.4s ease;
+    }
+
+    /* ========== User Container ========== */
+    .usersContainer{
+        position: relative;
+        width: 84vw;
+        height: 90vh;
+        background-color: #fff;
+        backdrop-filter: blur(7px);
+        box-shadow: 0 .4rem .8rem #0005;
+        border-radius: .8rem;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+
+    /* ========== User_Container/Header ========== */
+    /* ---------- Styling the header part ---------- */
+    .usersContainer .header{
+        width: 100%;
+        height: 60px;
+        background-color: #122543;
+        padding: .8rem 1rem;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* ---------- User_Container/Header/Search ---------- */
+    /*-------------- Styling the Search input in the header  ---------------*/
+    .usersContainer .input-group {
+        width: 35%;
+        height: 40px;
+        background-color: #fffa;
+        padding: 0 .8rem;
+        border-radius: 2rem;
+        color: #0b1629;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: .2s;
+    }
+
+    .usersContainer .input-group:hover {
+        width: 45%;
+        background-color: #fffc;
+        box-shadow: 0 .1rem .4rem #0002;
+    }
+
+    .usersContainer .input-group input {
+        width: 100%;
+        padding: 0 .5rem 0 .3rem;
+        background-color: transparent;
+        border: none;
+        outline: none;
+    }
+
+    /* ========== User_Container/Content ========== */
+    /* ---------- Styling the content part ---------- */
+    .usersContainer .content{
+        padding: 10px;
+        scrollbar-width: none;
+        width:100%;
+        height:87%;
+        overflow-y:scroll;
+        margin-top: 5px;
+
+        display: grid;
+        column-gap: 15px;
+        grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+        row-gap: 15px;
+        justify-content: center;
+    }
+
+    .usersContainer .content::-webkit-scrollbar{
+        display: none;
+    }
+
+    /* ========== User_Container/Adding_Anchor ========== */
+    /* ---------- Styling the anchor part ---------- */
+    .add-anchor {
+        position: absolute; 
+        {{#if (isEqual navdata.language "English")}}
+        right: 10px; 
+        {{else}}
+        left: 10px;
+        {{/if}}
+        bottom: 8px; 
+        background-color: #122543;
+        color: whitesmoke;
+        border: none;
+        border-radius: 50%; 
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        line-height: 50px; 
+        font-size: 24px;
+        cursor: pointer; 
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        display: block; /* To make the anchor behave like a block and take up space */
+        text-decoration: none; /* Removes the default underline of anchor tags */
+    }
+
+    .add-anchor:hover {
+        background-color: #e2ff65; 
+        color: #122543;
+    }
+
+    /* ========== User_Container/Content/Card ========== */
+    /* ---------- Styling the Profile Card part ---------- */
+    .card {
+        background-color: #8cc4df;
+        color: white;
+        width: 240px;
+        height: 340px;
+        border-radius: 25px;
+        padding-bottom: 1px;
+        box-shadow: 2px 2px 5px #4069E2;
+    }
+
+    /* ---------- Styling the header part ---------- */
+    .profile-header{
+        position: relative;
+        width: 100%;
+        background-color: #E6EBEE;
+        border-radius: 25px 25px 0 0;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* ---------- Styling the User_Name part ---------- */
+    .profile-header h1{
+        text-align: center;
+        width: 100%;
+        border-radius: 25px 25px 0 0;
+        color: #393B45;
+        padding: 30px 0;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    /* ---------- Styling the Image part ---------- */
+    .image-crop {
+        display: block;
+        position: relative;
+        background-color: #E6EBEE;
+        width: 150px;
+        height: 150px;
+        margin: 10px auto;
+        margin-left: 45px;
+        overflow: hidden;
+        border-radius: 50%;
+        box-shadow: 1px 1px 5px #4069E2;
+    }
+
+    #avatar {
+        display: inline;
+        height: 230px;
+        width: auto;
+        margin-left: -34px;
+    }
+
+    .imageColumn{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 150px;
+        height: 150px;
+
+        
+        position: relative;
+        background-color: #E6EBEE;
+        margin: 10px auto;
+        margin-left: 45px;
+        overflow: hidden;
+        border-radius: 50%;
+        box-shadow: 1px 1px 5px #4069E2;
+    }
+
+    .imageColumn:hover{
+        cursor: pointer;
+    }
+
+    .imageColumn .img{
+        border-radius: 50%;
+        height: 150px;
+        width: 150px;
+        top: -74px;
+
+        border: 7px solid transparent; /*2*/
+        background: linear-gradient(to bottom, #E6EBEE 50%, #E6EBEE 50%) border-box; /*3*/
+        -webkit-mask: 
+            linear-gradient(#fff 0 0) padding-box, 
+            linear-gradient(#fff 0 0);
+    }
+
+    /* ---------- Styling the Phone/Email part ---------- */
+    #stats {
+        width: 280px;
+        margin: 0 auto;
+        margin-top: 5px;
+        font-weight: 500;
+        {{#if (isEqual navdata.language "English")}}
+        padding-left: 10px;
+        {{else}}
+        padding-right: 10px;
+        {{/if}}
+    }
+
+    .col {
+        width: auto;
+        display: flex;
+    }
+
+    .stat i{
+        font-size: 20px;
+    }
+
+    .label{
+        {{#if (isEqual navdata.language "English")}}
+        padding-left: 10px;
+        {{else}}
+        padding-right: 10px;
+        {{/if}}
+        font-size: 13px;
+    }
+
+    /* ========== Edit/Delete Option ========== */
+    .profile-card {
+        position: relative;
+        padding: 5px 10px;
+        width: 100%;
+        font-size: 18px;
+        float: right;
+        z-index: 99;
+    }
+
+    .options-icon {
+        cursor: pointer;
+    }
+
+    .options-dropdown {
+        border-radius: 10px;
+        color: white;
+        position: absolute;
+        {{#if (isEqual navdata.language "English")}}
+        right: 130px;
+        {{else}}
+        left: 130px;
+        {{/if}}
+        top: 25px;
+        width: 100px;
+        background-color: #122543;
+        text-align: center;
+    }
+
+    .option {
+        border-radius: 10px;
+        margin:5px 3px;
+        padding: 0 10px;
+        cursor: pointer;
+    }
+
+    .option a{
+        text-decoration: none;
+        color: white;
+    }
+
+    .option a:hover {
+        color: #e2ff65;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    /* -------- Responsive ---------- */
+
+    /* ===================================== */
+    /* ========== Portrait Screen ========== */
+    /* ===================================== */
+    
+    @media screen and (max-width: 630px) and (orientation: portrait){
+        
+        .usersContainer{
+            height: 82vh;
+        }
+        
+        .header h1{
+            font-size: 16px;
+        }
+        .input-group{
+            width: 100%;
+            height: 40px;
+        }
+        .input-group:hover{
+            width: 100%;
+        }
+        .usersContainer .content{
+            grid-template-columns: 240px;
+        }
+        .toast{
+            margin-top: 70px;
+            right: 5px;
+            top: 15px;
+            left: 10px;
+        }
+        .message .text{
+            font-size: 14px;
+        }
+    }
+
+    /*@media screen and (min-width: 630px) and (max-width: 930px) and (orientation: portrait){
+        .home-section{
+            padding-top: 3vh;
+        }
+        .usersContainer{
+            height: 82%;
+        }
+        .sidebar.open ~ .home-section .usersContainer{
+            width: 84vw;
+        }
+        .header h1{
+            font-size: 14px;
+        }
+        .input-group{
+            width: 100%;
+            height: 40px;
+        }
+        .input-group:hover{
+            width: 100%;
+        }
+        .usersContainer .content{
+            grid-template-columns: repeat(2, 240px);
+        }
+        .toast{
+            margin-top: 70px;
+            right: 5px;
+            top: 15px;
+            left: 10px;
+        }
+        .message .text{
+            font-size: 14px;
+        }
+    }
+
+    @media screen and (min-width: 930px) and (max-width: 1230px) and (orientation: portrait){
+        .home-section{
+            padding-top: 3vh;
+        }
+        .usersContainer{
+            height: 82%;
+        }
+        .sidebar.open ~ .home-section .usersContainer{
+            width: 84vw;
+        }
+        .input-group{
+            width: 100%;
+            height: 45px;
+        }
+        .input-group:hover{
+            width: 100%;
+        }
+        .usersContainer .content{
+            grid-template-columns: repeat(3, 240px);
+        }
+        .toast{
+            margin-top: 70px;
+            right: 5px;
+            top: 15px;
+            left: 10px;
+        }
+        .message .text{
+            font-size: 14px;
+        }
+    }
+
+    @media screen and (min-width: 1230px) and (orientation: portrait){
+        .home-section{
+            padding-top: 3vh;
+        }
+        .usersContainer{
+            height: 82%;
+        }
+        .sidebar.open ~ .home-section .usersContainer{
+            width: 84vw;
+        }
+        .input-group{
+            width: 100%;
+            height: 45px;
+        }
+        .input-group:hover{
+            width: 100%;
+        }
+        .usersContainer .content{
+            grid-template-columns: repeat(4, 240px);
+        }
+        .toast{
+            margin-top: 70px;
+            right: 5px;
+            top: 15px;
+            left: 10px;
+        }
+        .message .text{
+            font-size: 14px;
+        }
+    }*/
+
+    /* ====================================== */
+    /* ========== Landscape Screen ========== */
+    /* ====================================== */ 
+
+    /* ---------- less than 900px will display 2 cards ---------- */
+    /* ---------- till 600px if the sidebar open the screen display 1 cards ---------- */
+    /*@media (max-width: 600px) and (orientation: landscape){
+        .header{
+            width: 100%;
+        }
+        .usersContainer .content{
+            grid-template-columns: 240px;
+        }
+        .input-group{
+            height: 40px;
+        }
+        .sidebar.open ~ .home-section .usersContainer{
+            width: 90%;
+        }
+    }*/
+
+    /* ---------- from 600px till 920px will display 2 cards ---------- */
+    /* ---------- till 800px if the sidebar open the screen display 1 cards ---------- */
+    /*@media screen and (min-width: 600px) and (max-width: 800px) and (orientation: landscape){
+        .usersContainer .content{
+            grid-template-columns: repeat(2, 240px);
+            padding: 5px 0;
+        }
+        .input-group{
+            height: 40px;
+        }
+        .sidebar.open ~ .home-section .usersContainer{
+            width: 90%;
+        }
+        .sidebar.open ~ .home-section .usersContainer .content{
+            grid-template-columns: repeat(1, 240px) ;
+        }
+    }*/
+    /* ---------- from 800px till 920px even if the sidebar open it will display 2 cards ---------- */
+    /*@media screen and (min-width: 800px) and (max-width: 920px) and (orientation: landscape){
+        .usersContainer .content{
+            grid-template-columns: repeat(2, 240px);
+            padding: 5px 0;
+        }
+        .input-group{
+            height: 40px;
+        }
+        .sidebar.open ~ .home-section .usersContainer{
+            width: 90%;
+        }
+    }*/
+
+    /* ---------- from 920px till 1200px will display 3 cards ---------- */
+    /* ---------- till 1170px if the sidebar open the screen display 2 cards ---------- */
+    /*@media screen and (min-width: 920px) and (max-width: 1170px) and (orientation: landscape){
+        .usersContainer .content{
+            grid-template-columns: repeat(3, 240px);
+            padding: 5px 0;
+        }
+        .input-group{
+            height: 40px;
+        }
+        .sidebar.open ~ .home-section .usersContainer .content{
+            grid-template-columns: repeat(2, 240px);
+        }
+    }*/
+    /* ---------- from 1170px till 1200px even if the sidebar open it will display 3 cards ---------- */
+    /*@media screen and (min-width: 1170px) and (max-width: 1200px) and (orientation: landscape){
+        .usersContainer .content{
+            grid-template-columns: repeat(3, 240px);
+            padding: 5px 0;
+        }
+        .input-group{
+            height: 40px;
+        }
+    }*/
+
+    /* ---------- from 1200px till 1500px will display 4 cards ---------- */
+    /* ---------- till 1410px if the sidebar open the screen display 3 cards ---------- */
+    /*@media screen and (min-width: 1200px) and (max-width: 1410px) and (orientation: landscape){
+        .usersContainer .content{
+            grid-template-columns: repeat(4, 240px);
+            padding: 5px 0;
+        }
+        .input-group{
+            height: 40px;
+        }
+        .sidebar.open ~ .home-section .usersContainer .content{
+            grid-template-columns: repeat(3, 240px);
+        }
+    }*/
+    /* ---------- from 1410px till 1500px even if the sidebar open it will display 4 cards ---------- */
+    /*@media screen and (min-width: 1410px) and (max-width: 1500px) and (orientation: landscape){
+        .usersContainer .content{
+            grid-template-columns: repeat(4,240px);
+            padding: 5px 0;
+        }
+        .input-group{
+            height: 40px;
+        }  
+    }*/
+
+    /* ---------- from 1500px will display 5 cards ---------- */
+    /* ---------- till 1710px if the sidebar open the screen display 4 cards ---------- */
+    /*@media screen and (min-width: 1500px) and (max-width: 1710px) and (orientation: landscape){
+        .usersContainer .content{
+            grid-template-columns: repeat(5, 240px);
+        }
+        .input-group{
+            height: 40px;
+        }  
+        .sidebar.open ~ .home-section .usersContainer .content .content{
+            grid-template-columns: repeat(4,240px);
+        }
+    }
+
+    @media screen and (min-width: 1710px) and (max-width: 1790px) and (orientation: landscape){
+        .usersContainer .content{
+            grid-template-columns: repeat(5,240px);
+        }
+        .input-group{
+            height: 40px;
+        }  
+    }
+
+    @media screen and (min-width: 1790px) and (max-width: 1920px) and (orientation: landscape){
+        .usersContainer .content{
+            grid-template-columns: repeat(6, 240px);
+        }
+        .input-group{
+            height: 40px;
+        }  
+        .sidebar.open ~ .home-section .usersContainer .content .content{
+            grid-template-columns: repeat(5,240px);
+        }
+    }
+    @media screen and (min-width: 1920px) and (orientation: landscape){
+        .usersContainer .content{
+            grid-template-columns: repeat(6,240px);
+        }
+        .input-group{
+            height: 40px;
+        }  
+    }*/
+    
+</style>

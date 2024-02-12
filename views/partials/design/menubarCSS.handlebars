@@ -1,0 +1,216 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+    .menubar {
+        display: flex;
+        align-items: center;
+        padding: 10px 40px;
+        color: #fff;
+        z-index: 999;
+    }
+
+    .menubar_left{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    {{#if navdata.isLogin}}
+    .menubar {
+        justify-content: flex-end; 
+    } 
+    {{else}} 
+    .menubar {
+        justify-content: space-between;
+    } 
+    {{/if}}
+
+  .menubar .logo-details{
+      height: 40px;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-decoration: none;
+  }
+
+    .menubar .logo-details .icon{
+        font-size: 24px;
+        width: 34px;
+        height: 28px;
+        color: white;
+    }
+
+    .menubar .logo-details .icon::before{
+        width: 25px;
+        height: 25px;
+
+    }
+
+    .menubar .logo-details .logo_name{
+      color: #fff;
+      font-size: 22px;
+      font-weight: 600;
+      transition: all 0.5s ease;
+    }
+
+    .menubar .login {
+        background-color: #4CAF50;
+        padding: 8px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        color: #fff;
+        transition: background-color 0.3s;
+        max-height: 40px;
+        {{#if (isEqual webLanguage "English")}}
+        margin-right: 5px;
+        {{else}}
+        margin-left: 5px;
+        {{/if}}
+    }
+
+.menubar .logout {
+    background-color: #ff3333;
+    padding: 8px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #fff;
+    transition: background-color 0.3s;
+    max-height: 40px;
+    {{#if (isEqual navdata.language "English")}}
+    margin-right: 5px;
+    {{else}}
+    margin-left: 5px;
+    {{/if}}
+}
+
+.menubar .login:hover {
+    background-color: #45a049;
+}
+
+.menubar .logout:hover {
+    background-color: #cc0000;
+}
+
+    /* Responsive design: stack logo and login anchor for smaller screens */
+    @media (max-width: 600px) {
+        .dropdown button{
+          padding: 5px;
+          min-width: none;
+        }
+        .menubar .login{
+            font-size: 10px;
+        }
+    }
+
+    .dropdown button {
+        background-color: #253849;
+        min-width: 130px;
+        width: max-content;
+        height: 40px;
+        border-radius: 5px;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        justify-content: space-evenly;
+    }
+
+    .dropdown button img {
+        margin: 0 5px 0 0;
+    }
+
+    .dropdown button img,
+    .dropdown-content li img {
+        width: 28px;
+    }
+
+    .dropdown button,
+    .dropdown-content li {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+.arrow-down {
+  width: 0;
+  height: 0;
+  display: inline-block;
+  vertical-align: middle;
+  border-style: solid;
+  border-width: 4px 4px 0 4px;
+  border-color: #fff transparent transparent transparent;
+  margin: 0 0 0 5px;
+}
+
+.dropdown button:hover {
+  cursor: pointer;
+  background-color: #3c5b77;
+}
+/* Style for the dropdown content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  margin: 1px 0 0 0;
+  padding: 0;
+  background-color: #f5f5f5;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 5px;
+  overflow-y: scroll;
+  max-height: 315px;
+}
+/* Style for the dropdown content items */
+.dropdown-content li {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  justify-content: end;
+}
+.dropdown-content li img {
+  margin: 0 20px 0px 20px;
+}
+/* Style for the dropdown content items on hover */
+.dropdown-content li:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+  color: blue;
+  border-radius: 5px;
+}
+
+/* Animate the dropdown content */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+    .dropdown-content {
+      animation: slideIn 0.3s ease-out;
+    }
+    /* Scrollbar styles */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      background: #c2c9d2;
+    }
+
+    @media (max-width: 900px) {
+        .menubar{
+            padding: 10px 15px;
+        }
+        .logout{
+          display: none;
+        }
+    }
+</style>

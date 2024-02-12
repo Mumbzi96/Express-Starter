@@ -1,0 +1,493 @@
+<style>
+    .committeeFormContainer {
+        display: none;
+        background-color: #122543;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        overflow: hidden;
+    }
+
+    .committee-form {
+        color: #ecf0f1;
+    }
+
+    .form-label {
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+
+    /* filter */
+    .filter{
+        margin: 0 auto;
+        width: 94%;
+        height: 60px;
+        padding: .8rem 1rem;
+        color: #122543;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* bookmark for cards */
+    .bookmark{
+        border: 1px solid black;
+        position: absolute;
+        left: -48px;
+        top: 42px;
+        transform: rotate(-45deg);
+        cursor: pointer;
+        padding: 5px; /* Adjust padding as needed */
+        background-color: #122543;
+        width: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .rotated-text{
+        font-size: 13px;
+        font-weight: 400;
+        color: white;
+    }
+
+    .checkbox-container {
+        display: flex;
+        flex-direction: column;
+        height: 170px;
+        max-height: 170px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: transparent transparent;
+        margin-top: 10px;
+    }
+
+.checkbox-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for WebKit browsers (Chrome, Safari) */
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.checkbox-item input {
+    {{#if (isEqual navdata.language "English")}}
+    margin-right: 10px;
+    {{else}}
+    margin-left: 10px;
+    {{/if}}
+}
+
+.submit-btn {
+  background-color: #27ae60;
+  color: #ffffff;
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background-color: #219d54;
+}
+
+.closeDiv {
+        position: absolute;
+        top: 10px;
+        {{#if (isEqual navdata.language "English")}}
+        right: 10px;
+        {{else}}
+        left: 10px;
+        {{/if}}
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .closeDiv:hover,
+    .closeDiv:focus {
+        color: #8cc4df;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .home-section-container{
+        padding-top: 70px;
+        overflow-x: hidden;
+    }
+
+   
+
+    .noContent{
+        height: 50vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .noContent p {
+        font-size: 24px;
+        color: antiquewhite;
+    }
+
+    
+    /* ---------- Header ---------- */
+    .header{
+        margin: 0 auto;
+        width: 94%;
+        height: 60px;
+        padding: .8rem 1rem;
+        color: #122543;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .header h1{
+        border-bottom: 3px solid #122543;
+        font-size: 22px;
+    }
+
+    /* ---------- Search Bar ---------- */
+    .header .input-group {
+        width: 35%;
+        height: 36px;
+        background-color: #fffa;
+        padding: 0 .8rem;
+        border-radius: 10px;
+        color: #0b1629;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: .2s;
+    }
+
+    .header .input-group:hover {
+        width: 45%;
+        background-color: #fffc;
+        box-shadow: 0 .1rem .4rem #0002;
+    }
+
+    .header .input-group input {
+        width: 100%;
+        padding: 0 .5rem 0 .3rem;
+        background-color: transparent;
+        border: none;
+        outline: none;
+    }
+
+    input[type="search"]::-webkit-search-clear-button,
+    input[type="search"]::-webkit-search-decoration,
+    input[type="search"]::-webkit-search-results-button,
+    input[type="search"]::-webkit-search-results-decoration {
+        display: none; 
+    }
+
+    /* ---------- Content ---------- */
+    .content-Container{
+        position: relative;
+        width: 94%;
+        backdrop-filter: blur(7px);
+        padding: 10px 0;
+        display: grid;
+        grid-template-columns:repeat(auto-fill, minmax(250px, 1fr));
+        row-gap: 15px;
+        margin-top: 30px;
+        margin-left: 3%;
+        margin-right: 3%;
+        scrollbar-width: none; /* For modern Firefox */
+    }
+
+    .card, .card:hover, .card:visited, .card:active {
+        color: inherit; /* inherit the color from its parent element */
+        text-decoration: none; /* removes the underline */
+    }
+    
+    .card{
+        background-color: #1c1b29;
+        box-shadow: 0 0 30px rgba(0,0,0,0.14);
+        margin: 0 auto;
+        background-image: url('/images/research.png');
+        background-size: cover;
+        width: 250px;
+        height: 320px;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.6s; /* this creates the smooth scaling effect */
+    }
+
+    .card .container{
+        position: relative;
+        clip-path: polygon(0 18%,100% 0, 100% 100%, 0 100%);
+    }
+
+    .card .details{
+        padding: 20px 10px;
+        width: 100%;
+        height: 130px;
+        border-radius: 0 0 10px 10px;
+        background: #e2ff65;
+        position: absolute;
+        bottom: 0;
+    }
+
+    .information{
+        overflow-y: auto;
+        min-height: 70px;
+        max-height: 70px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    }
+
+    .information::-webkit-scrollbar {
+        display: none;
+    }
+
+    .card:hover {
+        transform: scale(1.03); /* this enlarges the card by 5% on hover */
+        cursor: pointer;
+    }
+
+    .card-title {
+        margin: 2px 0;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .card-text {
+        margin: 5px 5px;
+        font-size: 16px;
+        text-align: center;
+        color: #555;
+    }
+
+    .card-button {
+        display: block;
+        width: 100%;
+        margin: 0 5px;
+        padding: 5px 10px;
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .card-button:hover {
+        background-color: #0056b3;
+    }
+
+    /* ---------- Comment Div ---------- */
+    .hiddenCommentDiv {
+        z-index: 99;
+        height: 100vh;
+        display: none;
+        position: fixed;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        border: 1px solid #000;
+        border-radius: 10px;
+        background-color: #0b1629;
+        width: 97%;
+        height: 650px;
+        overflow: auto;
+        scrollbar-width: none; /* For modern Firefox */
+        box-shadow: 2px 2px 12px rgba(0,0,0,0.2);
+    }
+
+    .hiddenCommentDiv::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .hiddenCommentDiv .close-wrapper{
+        width: 100%;
+        color: #e2ff65;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+    .hiddenCommentDiv .close-wrapper .close-btn {
+       text-decoration: none;
+        color: #8cc4df;
+        transition: all 0.3s;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        padding-left: 3px;
+    }
+
+    .hiddenCommentDiv .close-wrapper .close-btn i {  /* Style the icon itself */
+        font-size: 22px;
+        background-color: transparent;
+        border-radius: 50%;  /* Prepare for the circular hover effect */
+    }
+    
+
+    .hiddenCommentDiv .close-wrapper .close-btn:hover{
+        background-color: #e2ff65;
+    }
+    
+    .hiddenCommentDiv .comment {
+        background-color: #122543;
+        margin-bottom: 20px;
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    .hiddenCommentDiv .comment .comment-author {
+        color: #e2ff65;
+        border-bottom: 2px solid #8cc4df;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+    }
+
+    .hiddenCommentDiv .comment .comment-content {
+        color: #8cc4df;
+    }
+
+    /* ========== Checkbox for Mediator Feature ========== */
+    /* Base styles for the custom checkbox */
+    .custom-checkbox {
+        position: absolute; 
+        top: 10px; /* Adjust to move it slightly down from the very top */
+        right: 10px; /* Adjust to move it slightly left from the very right */
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+    }
+
+    .custom-checkbox input[type="checkbox"] {
+        display: none;
+    }
+
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #2c2c2c;
+        border-radius: 50%;
+        transition: all 0.3s ease; /* Smooth transition for better UX */
+    }
+
+    /* Styles for when the checkbox is checked */
+    .custom-checkbox input:checked ~ .checkmark {
+        background-color: #3498db; /* Blue color */
+        border-color: #3498db; /* Blue border color */
+        box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* Light blue shadow for some depth */
+    }
+
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+        left: 6px;
+        top: 3.5px;
+        width: 5px;
+        height: 9px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(35deg);
+    }
+
+    .custom-checkbox input:checked ~ .checkmark:after {
+        display: block;
+        transition: width 0.2s ease, height 0.2s ease;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: space-between;  /* Spacing between buttons */
+        align-items: center;  /* Align items vertically in the center */
+    }
+
+    /* This hidden div only for mediator user which display the users can talk with */
+    .detailsDiv {
+        position: absolute;
+        color: white;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 10px;
+        width: 230px;
+        background-color: #122543;
+        z-index: 55;
+    }
+
+    .detailsDiv h2 {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .detailsDiv a {
+        display: block;
+        margin-bottom: 10px;
+        background-color: #4CAF50;
+        color: white;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+
+    .detailsDiv a:hover {
+        background-color: #45a049;
+    }
+
+    /* -------- Responsive ---------- */
+    @media screen and (orientation: portrait){
+        .home-section-container{
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .header h1{
+            font-size: 14px;
+        }
+        .input-group{
+            width: 100%;
+            height: 40px;
+        }
+        .input-group:hover{
+            width: 100%;
+        }
+        .hiddenCommentDiv{
+            width: 97%;
+            height: 80%;
+            top: 55%;
+        }
+        .toast{
+            margin-top: 70px;
+            right: 5px;
+            top: 15px;
+            left: 10px;
+        }
+        .message .text{
+            font-size: 14px;
+        }
+    }
+
+    @media screen and (orientation: landscape) and (max-height: 430px) {
+        .home-section-container{
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+        .hiddenCommentDiv{
+            width: 97%;
+            height: 80%;
+            top: 55%;
+        }
+    }
+        
+</style>

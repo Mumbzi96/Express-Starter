@@ -1,0 +1,48 @@
+<html>
+	<head>
+		<meta charset='UTF-8' />
+		<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+		<meta
+			name='viewport'
+			content='width=device-width, initial-scale=1, shrink-to-fit=no'
+		/>
+		<link rel='icon' type='image/png' href='' />
+		<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<title>{{title}}</title>
+
+		<!-- Font Awesome Icons -->
+		<script
+			src='https://kit.fontawesome.com/d40b60d37f.js'
+			crossorigin='anonymous'
+		></script>
+    {{>design/signupCSS}}
+	</head>
+
+	<body onload=''>
+		<section class="container loginForm">
+			<header>{{#if (isEqual webLanguage "English")}}Login{{else}}تسجيل الدخول{{/if}}</header>
+
+			<form action="/login" class="form" id="form" method="post">
+				<div class="input-box email">
+					<label>{{#if (isEqual webLanguage "English")}}Email{{else}}بريد إلكتروني{{/if}}</label>
+					<input type="text" id="email" placeholder="{{#if (isEqual webLanguage "English")}}Enter your Email{{else}}ادخل البريد إلكتروني{{/if}}" name="email" />
+				</div>
+
+				<div class="input-box password">
+					<label for="password">{{#if (isEqual webLanguage "English")}}Password{{else}}كلمة المرور{{/if}}</label>
+					<input type="password" id="password" placeholder="{{#if (isEqual webLanguage "English")}}Enter your Password{{else}}ادخل كلمة المرور{{/if}}" name="password" />
+					<i id="pass-toggle-btn" class="fa-solid fa-eye"></i>
+				</div>
+				
+				<button type="submit">{{#if (isEqual webLanguage "English")}}Login{{else}}تسجيل الدخول{{/if}}</button>
+			</form>
+
+			<p class="loginSwitch">{{#if (isEqual webLanguage "English")}}Don't have an Account?{{else}}ليس لديك حساب؟{{/if}} <a href="/signup">{{#if (isEqual webLanguage "English")}}Signup{{else}}اشترك{{/if}}</a></p>
+		</section>
+
+		{{> script/loginScript}}
+	</body>
+</html>
+
+

@@ -1,0 +1,173 @@
+{{> Navbar/sidebar}}
+
+<div class="home-section home-section-container">
+    {{#if isEdit}}<form class="application-container" method="post" action="/updatefees/{{info._id}}">{{else}}<div class="application-container">{{/if}}
+
+        <div class="big-title">{{#if (isEqual navdata.language "English")}}Application Types and Fees{{else}}أنواع الطلبات والرسوم{{/if}}</div>
+
+        <br>
+        <div class="service-container">
+            <div class="headerColumn">
+                <h3>{{#if (isEqual navdata.language "English")}}Paper Type{{else}}النوع الورقي{{/if}}</h3>
+                {{#unless isEdit}}<a href="/updatefees">{{#if (isEqual navdata.language "English")}}Update Fees{{else}}تحديث الرسوم{{/if}}</a>{{/unless}}
+            </div>
+
+            <div class="dataColumn">
+                <label>{{#if (isEqual navdata.language "English")}}Normal Track: {{else}}المسار العادي: {{/if}}</label>
+                {{#if isEdit}}
+                <input type="number" min="0" name="paperNormal" value="{{info.paymentTrack.paperNormal}}">
+                {{else}}
+                <span>{{info.paymentTrack.paperNormal}}</span>
+                {{/if}}
+            </div>
+            <div class="dataColumn">
+                <label>{{#if (isEqual navdata.language "English")}}Fast Track: {{else}}المسار السريع: {{/if}}</label>
+                {{#if isEdit}}
+                <input type="number" min="0" name="paperFast" value="{{info.paymentTrack.paperFast}}">
+                {{else}}
+                <span>{{info.paymentTrack.paperFast}}</span>
+                {{/if}}
+            </div>
+        </div>
+        <hr>
+        <br>
+
+        <div class="service-container">
+            <div class="headerColumn">
+                <h3>{{#if (isEqual navdata.language "English")}}Electronic Type{{else}}النوع الالكتروني{{/if}}</h3>
+            </div>
+
+            <div class="dataColumn">
+                <label>{{#if (isEqual navdata.language "English")}}Normal Track: {{else}}المسار العادي: {{/if}}</label>
+                {{#if isEdit}}
+                <input type="number" min="0" name="electronicNormal" value="{{info.paymentTrack.electronicNormal}}">
+                {{else}}
+                <span>{{info.paymentTrack.electronicNormal}}</span>
+                {{/if}}
+            </div>
+            <div class="dataColumn">
+                <label>{{#if (isEqual navdata.language "English")}}Fast Track: {{else}}المسار السريع: {{/if}}</label>
+                {{#if isEdit}}
+                <input type="number" min="0" name="electronicFast" value="{{info.paymentTrack.electronicFast}}">
+                {{else}}
+                <span>{{info.paymentTrack.electronicFast}}</span>
+                {{/if}}
+            </div>
+        </div>
+
+        {{#if isEdit}}
+        <div class="submit-button-container">
+            <button type="submit" class="submit-button">{{#if (isEqual navdata.language "English")}}Update Fees{{else}}تحديث الرسوم{{/if}}</button>
+        </div>
+        {{/if}}
+
+    {{#if isEdit}}</form>{{else}}</div>{{/if}}
+</div>
+
+<style>
+    .home-section-container{
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 70px;
+    }
+
+    .application-container {
+        position: relative;
+        max-width: 700px;
+        width: 500px;
+        background: #fff;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        top: 0;
+        right: 0;
+    }
+
+    .big-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #122543;
+        text-align: center;
+    }
+    
+    .application-container .headerColumn{
+        margin: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-right: 10px;
+    }
+
+    .application-container .headerColumn a{
+        text-decoration: none;
+        font-size: 13px;
+    }
+
+    .application-container .dataColumn{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 15px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        background-color: #f5f5f5;
+        border-radius: 5px;
+    }
+
+    .application-container .dataColumn label{
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .application-container .dataColumn span{
+        font-size: 14px;
+    }
+
+    .application-container .dataColumn input {
+        width: 50px; /* Adjust the width as needed */
+        padding: 5px;
+        border: 1px solid #ccc; /* Border color */
+        border-radius: 3px;
+        box-sizing: border-box;
+    }
+
+    .application-container .dataColumn input {
+        width: 50px; /* Adjust the width as needed */
+        padding: 5px;
+        border: 1px solid #ccc; /* Border color */
+        border-radius: 3px;
+        box-sizing: border-box;
+        -moz-appearance: textfield; /* Firefox */
+        -webkit-appearance: none; /* WebKit-based browsers (Chrome, Safari) */
+        appearance: none; /* Modern browsers */
+    }
+
+    .application-container .dataColumn input::-webkit-inner-spin-button,
+    .application-container .dataColumn input::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .submit-button-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .submit-button {
+        background-color: #5a82ff;; 
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .submit-button:hover {
+        background-color: #2e4ecc; 
+        color: #fff;
+    }
+</style>

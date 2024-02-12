@@ -1,0 +1,256 @@
+<style>
+    .home-section-container{
+        padding-top: 70px;
+        overflow-x: hidden;
+        height: 100vh;
+
+    }
+
+
+    /* ---------- Table ---------- */
+    main.table {
+        position: relative;
+        width: 82vw;
+        height: 90vh;
+        background-color: #fff;
+
+        backdrop-filter: blur(7px);
+        box-shadow: 0 .4rem .8rem #0005;
+        border-radius: .8rem;
+
+        margin: 0 auto;
+        overflow: hidden;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    /* ---------- Table Header ---------- */
+    .table__header {
+        width: 100%;
+        height: 60px;
+        background-color: #122543;
+        padding: .8rem 1rem;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* ---------- Search bar ---------- */
+    .table__header .input-group {
+        width: 35%;
+        height: 100%;
+        background-color: #fffa;
+        padding: 0 .8rem;
+        border-radius: 2rem;
+        color: #0b1629;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: .2s;
+    }
+
+    input[type="search"]::-webkit-search-clear-button,
+    input[type="search"]::-webkit-search-decoration,
+    input[type="search"]::-webkit-search-results-button,
+    input[type="search"]::-webkit-search-results-decoration {
+        display: none; 
+    }
+
+    /* ---------- Error Message ---------- */
+    .table__header .error span{
+        border-radius: 10px;
+        padding: 5px;
+    }
+
+    .table__header .input-group:hover {
+        width: 45%;
+        background-color: #fffc;
+        box-shadow: 0 .1rem .4rem #0002;
+    }
+
+    .table__header .input-group input {
+        width: 100%;
+        padding: 0 .5rem 0 .3rem;
+        background-color: transparent;
+        border: none;
+        outline: none;
+    }
+
+    /* ---------- Table Body ---------- */
+    .table__body {
+        width: 95%;
+        max-height: calc(89% - 1.6rem);
+        background-color: #fff;
+
+        margin: .8rem auto;
+        border-radius: .6rem;
+
+        overflow: auto;
+        overflow: overlay;
+    }
+
+    .table__body::-webkit-scrollbar{
+        width: 0.3rem;
+        height: 0.3rem;
+    }
+
+    .table__body::-webkit-scrollbar-thumb{
+        border-radius: .5rem;
+        background-color: #0004;
+        visibility: hidden;
+    }
+
+    .table__body:hover::-webkit-scrollbar-thumb{ 
+        visibility: visible;
+    }
+
+    table, th, td {
+        border-collapse: collapse;
+        padding: 1rem;
+        {{#if (isEqual navdata.language "English")}}
+        text-align: left;
+        {{else}}
+        text-align: right;
+        {{/if}}
+    }
+
+    thead th {
+        position: sticky;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+        text-transform: capitalize;
+        background-color: white;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #0000000b;
+    }
+
+    tbody tr {
+        --delay: .1s;
+        transition: .5s ease-in-out var(--delay), background-color 0s;
+    }
+
+    tbody tr.hide {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    tbody tr:hover {
+        background-color: #e2ff65 !important;
+    }
+
+    tbody tr td,
+    tbody tr td p,
+    tbody tr td img {
+        transition: .2s ease-in-out;
+    }
+
+    tbody tr.hide td,
+    tbody tr.hide td p {
+        padding: 0;
+        font: 0 / 0 sans-serif;
+        transition: .2s ease-in-out .5s;
+    }
+
+    tbody tr.hide td img {
+        width: 0;
+        height: 0;
+        transition: .2s ease-in-out .5s;
+    }
+
+    /* ========== Research Status ========== */
+    .approved {
+        color: #006b21;
+    }
+    .declined {
+        color: #b30021;
+    }
+    .pending {
+        color: #ebc474;
+    }
+
+
+    thead th span.icon-arrow {
+        display: inline-block;
+        width: 1.3rem;
+        height: 1.3rem;
+        border-radius: 50%;
+        border: 1.4px solid transparent;
+        
+        text-align: center;
+        font-size: 1rem;
+        
+        margin-left: .5rem;
+        transition: .2s ease-in-out;
+    }
+
+    thead th:hover span.icon-arrow{
+        border: 1.4px solid #6c00bd;
+    }
+
+    thead th:hover {
+        color: #6c00bd;
+    }
+
+    thead th.active span.icon-arrow{
+        background-color: #6c00bd;
+        color: #fff;
+    }
+
+    thead th.asc span.icon-arrow{
+        transform: rotate(180deg);
+    }
+
+    thead th.active,tbody td.active {
+        color: #6c00bd;
+    }
+
+
+    /* ---------- Adding New Research Link icon ---------- */
+    .add-anchor {
+        position: absolute; 
+
+        {{#if (isEqual navdata.language "English")}}
+        right: 10px; 
+        {{else}}
+        left: 10px;
+        {{/if}}
+        bottom: 8px; 
+        background-color: #122543;
+        color: whitesmoke;
+        border: none;
+        border-radius: 50%; 
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        line-height: 50px; 
+        font-size: 24px;
+        cursor: pointer; 
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        display: block; /* To make the anchor behave like a block and take up space */
+        text-decoration: none; /* Removes the default underline of anchor tags */
+    }
+
+    .add-anchor:hover {
+        background-color: #e2ff65; 
+        color: #122543;
+    }
+
+    /* ===================================== */
+    /* ========== Portrait Screen ========== */
+    /* ===================================== */
+    @media screen and (orientation: portrait){
+        .home-section{
+            width: 100%;
+            left: 0;
+        }
+        .sidebar.open ~ .home-section-container main.table{
+            width: calc(100% - 10px);
+        }
+    }
+</style>

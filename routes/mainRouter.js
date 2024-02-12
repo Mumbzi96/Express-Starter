@@ -9,8 +9,16 @@ const mainRouter = express.Router();
 //========================
 
 mainRouter.get('/', (req, res, next) => {
-	res.render('main/home');
+	
 });
+
+mainRouter.get('/login', (req ,res ,next) => {
+	res.render('layouts/login')
+})
+
+mainRouter.get('/signup', (req, res, next) => {
+	res.render('layouts/signup')
+})
 
 //========================
 //          Exports
