@@ -1,0 +1,129 @@
+<style>
+    .toast{
+        position: absolute;
+        {{#if (isEqual navdata.language "English")}}
+
+        right: 30px;
+        border-left: 6px solid green;
+        transform: translateX(calc(100% + 30px));
+        padding: 20px 35px 20px 25px;
+
+        {{else}}
+
+        left: 30px;
+        border-right: 6px solid green;
+        transform: translateX(calc(-100% - 30px));
+        padding: 20px 25px 20px 35px;
+
+        {{/if}}
+
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        overflow: hidden;
+        z-index: 99;
+        transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.35);
+    }
+
+    .toast.active{
+        transform: translateX(0%);
+    }
+
+    .toast .toast-content{
+        display: flex;
+        align-items: center;
+    }
+
+    .toast-content .check{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 35px;
+        width: 35px;
+        background-color: green;
+        color: #fff;
+        font-size: 20px;
+        border-radius: 50%;
+    }
+
+    .toast-content .message{
+        display: flex;
+        flex-direction: column;
+        margin: 0 20px;
+    }
+
+    .message .text{
+        font-size: 20px;
+        font-weight: 400;;
+        color: #666666;
+    }
+
+    .message .text.text-1{
+        font-weight: 600;
+        color: #333;
+    }
+
+    .toast .messageClose{
+        position: absolute;
+        top: 10px;
+
+        {{#if (isEqual navdata.language "English")}}
+        right: 15px;
+        {{else}}
+        left: 15px;
+        {{/if}}
+
+        padding: 5px;
+        cursor: pointer;
+        opacity: 0.7;
+    }
+
+    .toast .messageClose:hover{
+        opacity: 1;
+    }
+
+    .toast .progress{
+        position: absolute;
+        bottom: 0;
+
+        {{#if (isEqual navdata.language "English")}}
+        left: 0;
+        {{else}}
+        right: 0;
+        {{/if}}
+
+        height: 3px;
+        width: 100%;
+        background: #ddd;
+    }
+
+    .toast .progress:before{
+        content: '';
+        position: absolute;
+        bottom: 0;
+
+        {{#if (isEqual navdata.language "English")}}
+        right: 0;
+        {{else}}
+        left: 0;
+        {{/if}}
+
+        height: 100%;
+        width: 100%;
+        background-color: green;
+    }
+
+    .progress.active:before{
+        animation: progress 5s linear forwards;
+    }
+
+    @keyframes progress {
+        100%{
+            {{#if (isEqual navdata.language "English")}}
+            right: 100%;
+            {{else}}
+            left: 100%;
+            {{/if}}
+        }
+    }
+</style>

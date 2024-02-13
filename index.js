@@ -14,6 +14,7 @@ const mainRouter = require("./routes/mainRouter");
 // Project-made Modules
 const hbs = require("./views/helpers/handlebarsHelper"); // handlebars helper
 const sessionOptions = require("./helpers/sessionOptions");
+const usersRouter = require("./routes/usersRouter");
 
 // ====================================
 //             Configuration
@@ -66,6 +67,7 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 // Seperate Routes
 app.use("/test", testRouter);
+app.use("/users", usersRouter);
 app.use("/", mainRouter);
 
 // Error handling

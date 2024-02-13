@@ -1,30 +1,21 @@
-# Main
+# login
 
-This repository will be used to simply not have to waste time on setting up a new Express project.
-It has the essentials packages (at least essential for me) with a few folder setups that I usually like to have.
+fi 3andk login page bel layouts ma3 el css te3o bel partial design wel script bel script folder partial.
+lezim teb3ate el messages men el router lezim testa5dem res.json()
+la redirect bdk teb3at json({redirect: 'page path'})
+lezim kmn t7ot el message validation using express validator
 
-# How to use it
+# sidebar
+1. you should send the req.session.user via routers (variable name navdata)
+2. send the language with the navdata
 
-Well, forking is the best option, fork it and change the name and such things.
-You can also use it as a template
-
-1. Fork
-2. Change project name, readme file...
-3. Use `npm i` in the terminal to install the pockages
-4. Upload your own GIT repoistory on whatever platform you want
-
-# Run the project
-
-First things first, go to the project and add a config.env file in the config folder. This will also need to be filled with necessary data. The reason behind this is that config file is different for machines. For the current situation, all you need is to add a port like 3000 or 7777 or whatver.
-
-Two scripts are already added to run in the terminal:
-
-- `npm run start` which runs the project using `node index`
-- `npm run dev` which runs the project using `nodemon index`
-
-# Branch
-This branch uses express as an API that serves HTML and such via a template engine (express-handlebars).
-
-# Future additions
-
-It's a starter project so probably won't add anything to be honest.
+# List of Cards (for users)
+### use userCSS from partial => design
+1. sidebar from partial 
+2. section with "home-section home-section-contianer" classes 
+3. in the section add div with "usersContianer"
+4. the user continer containers their are 2 divs and 1 anchor 
+5. first div with "header" class
+6. "header" containes h1 tag for page title and div "input-group" have input of type search and search icon
+7. the second div with "content" class & id
+8. user loop in content to show the cards 

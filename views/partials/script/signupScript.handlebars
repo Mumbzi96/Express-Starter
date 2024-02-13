@@ -1,0 +1,154 @@
+<!-- Include the intl-tel-input and libphonenumber-js scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+<script src="https://unpkg.com/libphonenumber-js/bundle/libphonenumber-js.min.js"></script>
+
+
+<script>
+    // ================================================
+    // ================================================
+    //          Next & Pervious Buttons
+    // ================================================
+    // ================================================
+
+    const form = document.querySelector("form")
+    const nextBtn = form.querySelector(".nextBtn")
+    const backBtn = form.querySelector(".backBtn")
+
+    const passwordInput = document.getElementById("password");
+    const confirmPasswordInput = document.getElementById("confirmPassword");
+    const passToggleBtn = document.getElementById("pass-toggle-btn");
+    const passToggleConfirmBtn = document.getElementById("pass-toggle-confirm-btn");
+    let language = "{{webLanguage}}"
+
+    nextBtn.addEventListener("click", (e)=> {
+      e.preventDefault()
+        form.classList.add('secActive');
+    })
+
+    backBtn.addEventListener("click", (e) => {
+      e.preventDefault()
+      form.classList.remove('secActive')
+      });
+
+    // Toggling password visibility
+	passToggleBtn.addEventListener('click', () => {
+	    passToggleBtn.className = passwordInput.type === "password" ? "fa-solid fa-eye-slash" : "fa-solid fa-eye";
+		passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+	});
+
+    passToggleConfirmBtn.addEventListener('click', () => {
+	    passToggleConfirmBtn.className = confirmPasswordInput.type === "password" ? "fa-solid fa-eye-slash" : "fa-solid fa-eye";
+		confirmPasswordInput.type = confirmPasswordInput.type === "password" ? "text" : "password";
+	});
+
+</script>
+
+<script>
+    let iti;
+    document.addEventListener('DOMContentLoaded', function () {
+    // Initialize the intl-tel-input library and handle the 'ready' event
+    let input = document.querySelector("#phone");
+
+        iti = window.intlTelInput(input, {
+            separateDialCode: true,
+            initialCountry: "auto",
+            geoIpLookup: callback => {
+                fetch("https://ipapi.co/json")
+                .then(res => res.json())
+                .then(data => callback(data.country_code))
+                .catch(() => callback("us"));
+            },
+            nationalMode: true,
+            excludeCountries: ["il"], 
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+            preferredCountries: [],
+        });
+    });
+
+    function submitForm() {
+        // Get values from input fields
+        const phoneNumber = document.getElementById('phone').value;
+    }
+
+
+    // ================================================
+    // ================================================
+    //          Validation Error Messages
+    // ================================================
+    // ================================================
+
+
+    // Function to display error messages
+	const showError = (field, errorText) => {
+		field.classList.add("error");
+		const errorElement = document.createElement("small");
+		errorElement.classList.add("error-text");
+		errorElement.innerText = errorText;
+		field.closest(".input-box, .select-box").appendChild(errorElement);
+	}
+
+    // Function to handle form submission
+	const handleFormData = (e) => {
+		e.preventDefault();
+        let data = {}
+
+        // Clearing previous error messages
+		document.querySelectorAll(".input-box .error").forEach(field => field.classList.remove("error"));
+		document.querySelectorAll(".error-text").forEach(errorText => errorText.remove());
+        
+        if(!iti.isValidNumber()) return showError(document.getElementById('phone'), language === "English" ? "Invalid phone number" : "رقم الهاتف غير صحيح")
+
+        const formData = new FormData(e.target)
+        formData.forEach( (value, key)=>{
+            if(key === 'phone') {
+                let number = {
+                    dialCode: `+${iti.getSelectedCountryData().dialCode}`,
+                    iso2: iti.getSelectedCountryData().iso2,
+                    number: document.getElementById('phone').value
+                }
+                data[key] = JSON.stringify(number)
+            } else {
+                data[key] = value
+            }
+        })
+				
+		fetch("/signup",{
+			headers: {
+				"Content-Type": "application/json"
+			},
+			method: "POST",
+			body: JSON.stringify(data)
+		})
+		.then( res => res.json())
+		.then((data)=> {
+
+            if(data.errors) {
+
+                data.errors.forEach( error => {
+                    showError(document.getElementById(error.path), error.msg);
+                })
+            }
+            if (data.emailErrorMessage) {
+                showError(document.getElementById('email'), data.emailErrorMessage)
+                form.classList.remove('secActive')
+            }
+            if (data.confirmPasswordErrorMessage) {
+                showError(document.getElementById('confirmPassword'), data.confirmPasswordErrorMessage);
+                form.classList.remove('secActive')
+            }
+
+            if (data.redirect) {
+                window.location = data.redirect
+            }
+			
+		})
+		.catch( err => console.error(err))		
+						
+        // Checking for any remaining errors before form submission
+        const errorInputs = document.querySelectorAll(".form-group .error");
+	    if (errorInputs.length > 0) return;
+	}
+
+
+    form.addEventListener("submit", handleFormData);
+</script>

@@ -1,0 +1,208 @@
+<style>
+  /* Import Google font - Poppins */
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: #8cc4df;
+}
+.container {
+  position: relative;
+  max-width: 800px;
+  width: 100%;
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  min-height: 750px;
+}
+
+.loginForm{
+  min-height: auto;
+}
+
+.container.loginForm{
+  max-width: 400px;
+}
+.container header {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 500;
+  text-align: center;
+}
+.container .form {
+  margin-top: 30px;
+}
+.form .input-box, .form .select-box {
+  width: 100%;
+  margin-top: 20px;
+  position: relative;
+}
+.input-box label {
+  color: #333;
+}
+
+.address .select-box{
+  margin-top: 0;
+}
+.form :where(.input-box input, .select-box select) {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #707070;
+  margin-top: 8px;
+  border: 1px solid #8cc4df;
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  padding: 0 15px;
+}
+.input-box input:focus {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+.form .column {
+  display: flex;
+  column-gap: 15px;
+}
+
+.form .password i {
+  position: absolute;
+  {{#if (isEqual webLanguage "English")}}
+  right: 0px;
+  {{else}}
+  left: 0;
+  {{/if}}
+  height: 50px;
+  font-size: 13px;
+  line-height: 65px;
+  width: 50px;
+  cursor: pointer;
+  color: #939393;
+  text-align: center;
+}
+
+
+.form :where(.gender input, .gender label) {
+  cursor: pointer;
+}
+.gender label {
+  color: #707070;
+}
+
+
+.form button {
+  height: 55px;
+  max-width: 200px;
+  width: 100%;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 30px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgb(140, 196, 223);
+  border-radius: 5px;
+}
+
+.loginForm button{
+    max-width: none;
+}
+.form button:hover {
+  background: #00ccff
+}
+
+.loginSwitch{
+  margin-top: 10px;
+}
+
+.loginSwitch a{
+  text-decoration: none;
+}
+/*Responsive*/
+@media screen and (max-width: 500px) {
+  .form .column {
+    flex-wrap: wrap;
+  }
+  .form :where(.gender-option, .gender) {
+    row-gap: 15px;
+  }
+}
+
+
+/* ========== Error Messages ========== */
+.form .error {
+  border-color: #f91919;
+  background: #f9f0f1;
+}
+.form small {
+  font-size: 14px;
+  margin-top: 5px;
+  display: block;
+  color: #f91919;
+}
+
+.container form .form2{
+    display: none;
+    pointer-events: none;
+    transform: translateX(100%);
+}
+form.secActive .form2{
+    display: block;
+    pointer-events: auto;
+    transform: translateX(0);
+}
+form.secActive .form1{
+    display: none;
+    pointer-events: none;
+    transform: translateX(-100%);
+}
+
+.buttonDiv{
+    display: flex;
+}
+
+.buttonDiv .backBtn{
+    {{#if (isEqual webLanguage "English")}}
+    margin-right: 20px;
+    {{else}}
+    margin-left: 20px;
+    {{/if}}
+}
+
+
+/* country phone code*/
+.iti{
+        display: block;
+    }
+    .iti__flag-container{
+        height: 50px;
+        top: auto;
+    }
+
+    .iti input, .iti input[type=tel], .iti input[type=text]{
+        margin-top: 8px !important;
+    }
+
+    {{#unless (isEqual webLanguage "English")}}
+    .iti--allow-dropdown input, 
+    .iti--allow-dropdown input[type=tel], 
+    .iti--allow-dropdown input[type=text], 
+    .iti--separate-dial-code input, 
+    .iti--separate-dial-code input[type=tel], 
+    .iti--separate-dial-code input[type=text]{
+      text-align: right;
+    } 
+    {{/unless}}
+</style>
