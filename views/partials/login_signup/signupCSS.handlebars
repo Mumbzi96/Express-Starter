@@ -78,7 +78,7 @@ body {
 
 .form .password i {
   position: absolute;
-  {{#if (isEqual webLanguage "English")}}
+  {{#if (isEqual navdata.language "English")}}
   right: 0px;
   {{else}}
   left: 0;
@@ -174,7 +174,7 @@ form.secActive .form1{
 }
 
 .buttonDiv .backBtn{
-    {{#if (isEqual webLanguage "English")}}
+    {{#if (isEqual navdata.language "English")}}
     margin-right: 20px;
     {{else}}
     margin-left: 20px;
@@ -195,7 +195,7 @@ form.secActive .form1{
         margin-top: 8px !important;
     }
 
-    {{#unless (isEqual webLanguage "English")}}
+    {{#unless (isEqual navdata.language "English")}}
     .iti--allow-dropdown input, 
     .iti--allow-dropdown input[type=tel], 
     .iti--allow-dropdown input[type=text], 
