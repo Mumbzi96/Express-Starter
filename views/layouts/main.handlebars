@@ -34,7 +34,7 @@
 
 	</head>
 
-	<body onload='' dir="rtl">
+	<body onload='' {{#if (isEqual navdata.language "English")}}dir="ltr"{{else}}dir="rtl"{{/if}}>
 		{{{body}}}
 	</body>
 

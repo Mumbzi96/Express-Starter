@@ -1,0 +1,25 @@
+<script>
+    const arrow = document.querySelectorAll(".arrow");
+    const sidebar = document.querySelector(".sidebar");
+    const sidebarBtn = document.querySelector(".bx-menu");
+    const closeBtn = document.querySelector(".fa-xmark")
+
+    for (let i = 0; i < arrow.length; i++) {
+        arrow[i].addEventListener("click", (e) => {
+
+            let arrowParent = e.target.parentElement.parentElement;
+            arrowParent.classList.toggle("showMenu");
+
+        });
+    }
+
+    closeBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("close")
+        sidebar.classList.toggle("open")
+    })
+
+    sidebarBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
+        sidebar.classList.toggle('open')
+    });
+</script>

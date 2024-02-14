@@ -1,0 +1,121 @@
+{{> layout/sidebarCSS}}
+
+<div class="sidebar close">
+
+    {{!-- Opened sidebar showing logo and client name --}}
+    <div class="logo-details">
+        <i class="fa-solid fa-building-columns icon"></i>
+        <span class="logo_name">Client Name</span>
+        <i class="fa-solid fa-xmark"></i>
+    </div>
+
+    {{!-- LINKS --}}
+    {{!-- LINKS --}}
+    {{!-- LINKS --}}
+    <ul class="nav-links">
+
+        {{!-- Home --}}
+        {{!-- Home --}}
+        <li style="{{#if isHome}}{{#if (isEqual navdata.language " English")}}border-left: 4px solid
+            #e2ff65;{{else}}border-right: 4px solid #e2ff65;{{/if}}{{/if}}">
+            <a href="/" style="{{#if isHome}}{{#if (isEqual navdata.language " English")}}margin-left:
+                -4px{{else}}margin-right: -4px{{/if}}{{/if}}">
+                <i class='bx bx-home-alt'></i>
+                <span class="link_name">{{#if (isEqual navdata.language "English")}}Home{{else}}الصفحة
+                    الرئيسية{{/if}}</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="/">{{#if (isEqual navdata.language "English")}}Home{{else}}الصفحة
+                        الرئيسية{{/if}}</a></li>
+            </ul>
+        </li>
+
+        {{!-- Users --}}
+        {{!-- Users --}}
+        <li style="{{#if isUser}}{{#if (isEqual navdata.language " English")}}border-left: 4px solid
+            #e2ff65;{{else}}border-right: 4px solid #e2ff65;{{/if}}{{/if}}">
+            <a href="/users" style="{{#if isUser}}{{#if (isEqual navdata.language " English")}}margin-left:
+                -4px{{else}}margin-right: -4px{{/if}}{{/if}}">
+                <i class='bx bx-user'></i>
+                <span class="link_name">{{#if (isEqual navdata.language
+                    "English")}}Users{{else}}المستخدمين{{/if}}</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="/">{{#if (isEqual navdata.language
+                        "English")}}Users{{else}}المستخدمين{{/if}}</a></li>
+            </ul>
+        </li>
+
+        {{!-- Dropdown --}}
+        {{!-- Dropdown --}}
+        <li style="{{#if isResearches}}{{#if (isEqual navdata.language " English")}}border-left: 4px solid
+            #e2ff65;{{else}}border-right: 4px solid #e2ff65;{{/if}}{{/if}}">
+            <div class="iocn-link" style="{{#if isResearches}}{{#if (isEqual navdata.language " English")}}margin-left:
+                -4px{{else}}margin-right: -4px{{/if}}{{/if}}">
+                <a href="#">
+                    <i class='bx bx-collection'></i>
+                    <span class="link_name">{{#if (isEqual navdata.language "English")}}My
+                        Dropdown{{else}}قائمة{{/if}}</span>
+                </a>
+                <i class='bx bxs-chevron-down arrow'></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="#">{{#if (isEqual navdata.language "English")}}Item 1{{else}}الأبحاث{{/if}}</a></li>
+                <li><a href="/">{{#if (isEqual navdata.language "English")}}Item 2{{else}}البند 1{{/if}}</a></li>
+                <li><a href="/">{{#if (isEqual navdata.language "English")}}Item 3{{else}}البند 2{{/if}}</a></li>
+                <li><a href="/">{{#if (isEqual navdata.language "English")}}Item 4{{else}}البند 3{{/if}}</a></li>
+                <li><a href="/">{{#if (isEqual navdata.language "English")}}Item 5{{else}}البند 4{{/if}}</a></li>
+                <li><a href="/">{{#if (isEqual navdata.language "English")}}Item 6{{else}}البند 5{{/if}}</a></li>
+            </ul>
+        </li>
+
+        {{!-- Settings --}}
+        {{!-- Settings --}}
+        <li style="{{#if isSettings}}{{#if (isEqual navdata.language " English")}}border-left: 4px solid
+            #e2ff65;{{else}}border-right: 4px solid #e2ff65;{{/if}}{{/if}}">
+            <a href="/users/settings" style="{{#if isSettings}}{{#if (isEqual navdata.language " English")}}margin-left:
+                -4px{{else}}margin-right: -4px{{/if}}{{/if}}">
+                <i class='bx bx-cog'></i>
+                <span class="link_name">{{#if (isEqual navdata.language
+                    "English")}}Settings{{else}}الإعدادات{{/if}}</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">{{#if (isEqual navdata.language
+                        "English")}}Settings{{else}}الإعدادات{{/if}}</a></li>
+            </ul>
+        </li>
+
+        {{!-- Logout button and image --}}
+        {{!-- Logout button and image --}}
+        <li>
+            <div class="profile-details">
+                <div class="profile-container">
+                    <div class="profile-content">
+                        {{!-- {{#if user.profilePic}}
+                        <img class="img" src="{{sidebarImage navdata.profilePic}}">
+                        {{else}}
+
+                        {{/if}} --}}
+                        <img class="img" src="/images/avatar.jpg">
+                    </div>
+                    <div class="name-job">
+                        <div class="profile_name">username</div>
+                        <div class="job">userType</div>
+                    </div>
+                </div>
+                <a href="/logout"><i class='bx bx-log-out'></i></a>
+            </div>
+        </li>
+    </ul>
+</div>
+
+{{!-- Menu Bar --}}
+{{!-- Menu Bar --}}
+<section class="home-section home-section-header">
+    <div class="home-content">
+        <i class='bx bx-menu'></i>
+        {{> layout/menubar}}
+    </div>
+</section>
+
+{{> layout/sidebarScript}}
