@@ -1,0 +1,119 @@
+{{> forms/formCSS}}
+{{> layout/sidebar}}
+
+<section class="home-section home-section-container">
+    {{!-- Research Container --}}
+    <div class="researchContainer">
+        {{!-- Header --}}
+        <div class="header">
+            <div class="link">
+                <a href="/researches" type="button">
+                    <i class='bx bx-arrow-back'></i>
+                </a>
+                <h1>Header</h1>
+            </div>
+            <div class="error"><span id="error"></span></div>
+        </div>
+
+        {{!-- Research Data Form --}}
+        <form action="/researches/add" name="researchForm" id="researchForm" method="post"
+            enctype="multipart/form-data">
+            <div class="research-details">
+                {{!-- Research Title --}}
+                <div class="input-box">
+                    <label for="researchTitle" class="detail"> Title:</label>
+                    <input type="text" id="researchTitle" name="researchTitle" value="{{data.researchTitle}}">
+                </div>
+
+                {{!-- Research Description --}}
+                <div class="input-box">
+                    <label for="description" class="detail">Description:</label>
+                    <textarea form="researchForm" id="description" cols="30" rows="7"
+                        name="description">{{data.description}}</textarea>
+                </div>
+
+                {{!-- Type of Application --}}
+                <div class="input-box">
+                    <label for="applicationType" class="detail">Drowpdown:</label>
+                    <select id="applicationType" name="applicationType">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+
+                <!-- Radio -->
+                <div class="payment-track" id="">
+                    <label class="detail">Label :</label>
+                    <label class="radioHolder">
+                        <input type="radio" name="paymentTrackPaper" value="Normal">Something
+                    </label>
+                    <label class="radioHolder">
+                        <input type="radio" name="paymentTrackPaper" value="Fast"> Another thing
+                    </label>
+                </div>
+
+                {{!-- File --}}
+                <div class="input-box">
+                    <label for="file" class="detail"> File:</label>
+                    <input type="file" id="file" min="0" name="file" multiple>
+                </div>
+
+            </div>
+
+            <div class="button">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</section>
+
+<script>
+    document.getElementById('applicationType').addEventListener('change', function () {
+        let paperDiv = document.getElementById('paymentTrackPaper');
+        let electronicDiv = document.getElementById('paymentTrackElectronic');
+
+        // Hide both divs initially
+        paperDiv.style.display = 'none';
+        electronicDiv.style.display = 'none';
+
+        // Display the selected div based on the application type
+        if (this.value === 'Paper') {
+            paperDiv.style.display = 'block';
+        } else if (this.value === 'Electronic') {
+            electronicDiv.style.display = 'block';
+        }
+    });
+
+    let form = document.getElementById("researchForm")
+    let elements = Array.from(form.elements)
+    elements = elements.filter(element => { return (element.type != 'submit') })
+
+    //front end validation for the form
+    form.addEventListener('submit', event => {
+        let valid = true;
+        let counter = 0;
+        event.preventDefault()
+
+        // Name, Number, Deadline and TaskList validation and send message to fill all information
+        elements.forEach(element => {
+            if (element.value.trim() == "") {
+                valid = valid && false;
+                document.getElementById('error').innerHTML = 'All Fields are Required'
+                document.getElementById('error').style.backgroundColor = 'rgba(255, 0, 0, 0.7)'
+
+            } else {
+                valid = valid && true;
+            }
+        })
+
+        if (valid) {
+            form.submit()
+        }
+    })
+
+    // Validation Message
+    if ('{{errorMessage}}') {
+        document.getElementById('error').innerHTML = '{{errorMessage}}'
+        document.getElementById('error').style.backgroundColor = 'rgba(255, 0, 0, 0.7)'
+    }
+</script>
