@@ -73,8 +73,9 @@ app.use("/", mainRouter);
 // Error handling
 app.use(async (err, req, res, next) => {
 	console.log(err);
-	res.render("main/other/errorHandler", {
+	res.render("main/test/error", {
 		message: "An error has occured",
+		code:404,
 		err,
 	});
 });
