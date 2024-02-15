@@ -26,72 +26,7 @@
         }
     }
 
-//a function when the asc pressed changed to desc and visa versa
-/*const order = ()=>{
-    let button = document.getElementById('changeButton')
-    if(button.innerText === 'asc'){
-        button.innerText = 'desc'
-    }else{
-        button.innerText = 'asc'
-    }
-}
-
-//
-const Tables = document.getElementsByTagName('table')
-//take a default copy of the table
-const defaultList = [...Array.from(Tables)]
-//a sort function to sort the tables
-const sort = ()=>{
-    let order;
-    if(document.getElementById('changeButton').innerText == 'asc'){
-        order = 1;
-    }else{
-        order = -1
-    }
-
-    let selectedOption = document.getElementById('sortList').value
-    const div = document.getElementById('content')
-    //default list
-    if(selectedOption === 'default'){
-        div.append(...defaultList)
-        button.style.display = "none";
-    //sort using name
-    }else if(selectedOption === "name"){
-        button.style.display = "";
-        const table = Array.from(Tables).sort((a,b)=>{
-        let first = a.getElementsByTagName('tr')[0].getElementsByTagName('td')[0].textContent.trim().toLocaleLowerCase()
-        let second = b.getElementsByTagName('tr')[0].getElementsByTagName('td')[0].textContent.trim().toLocaleLowerCase()
-        return second > first ? -1*order : 1*order
-        })
-        div.append(...table)
-    //sort using deadline
-    }else if(selectedOption === "deadline"){
-        button.style.display = "";
-        const table = Array.from(Tables).sort((a,b)=>{
-        let first = a.getElementsByTagName('tr')[2].getElementsByTagName('td')[0].textContent.trim().toLocaleLowerCase()
-        let second = b.getElementsByTagName('tr')[2].getElementsByTagName('td')[0].textContent.trim().toLocaleLowerCase()
-        return second > first ? -1*order : 1*order
-        })
-        div.append(...table)
-    //sort using leader
-    }else if(selectedOption === "leader"){
-        button.style.display = "";
-        const table = Array.from(Tables).sort((a,b)=>{
-        let first = a.getElementsByTagName('tr')[4].getElementsByTagName('td')[0].textContent.trim().toLocaleLowerCase()
-        let second = b.getElementsByTagName('tr')[4].getElementsByTagName('td')[0].textContent.trim().toLocaleLowerCase()
-        return second > first ? -1*order : 1*order
-        })
-        div.append(...table)
-    }
-}
-
-let selectedOption = document.getElementById('sortList').value
-let button = document.getElementById('changeButton')
-if(selectedOption === 'default'){
-    button.style.display = "none";
-}*/
-
-    // Confirm for Deleting Research
+    // Confirm for Deleting
     const deleteConfirm = (id) => {
         let deleteButton = document.getElementById(`del${id}`)
         let message = language === "English" ? 'Are You Sure you want to delete this research?' : "هل أنت متأكد أنك تريد حذف هذا البحث؟"
@@ -100,7 +35,7 @@ if(selectedOption === 'default'){
         }
     }
 
-    // Confirm for Archive Research
+    // Confirm for Archive
     const archiveConfirm = (id) => {
         let archiveButton = document.getElementById(`archive${id}`)
         let message = language === "English" ? 'Are You Sure you want to archive this research?' : "هل أنت متأكد أنك تريد أرشفة هذا البحث؟"

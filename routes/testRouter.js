@@ -11,7 +11,7 @@ const testRouter = express.Router();
 testRouter.get("/", (req, res, next) => {
 	let navdata = { language: "English" };
 
-	res.render("main/home", {navdata});
+	res.render("main/home", { navdata });
 });
 
 //========================
@@ -21,7 +21,7 @@ testRouter.get("/", (req, res, next) => {
 testRouter.get("/settings", (req, res, next) => {
 	let navdata = { language: "English" };
 
-	res.render("main/test/settings", {navdata});
+	res.render("main/test/settings", { navdata });
 });
 
 //========================
@@ -108,6 +108,7 @@ testRouter.get("/cards", (req, res, next) => {
 
 testRouter.get("/table", (req, res, next) => {
 	let navdata = { language: "English" };
+
 	let researches = [
 		{
 			_id: "1",
