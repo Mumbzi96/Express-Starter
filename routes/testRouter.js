@@ -50,7 +50,7 @@ testRouter.get("/form", (req, res, next) => {
 testRouter.get("/signup", (req, res, next) => {
 	let navdata = { language: "English" };
 
-	res.render("main/test/empty", { layout: "signup", navdata });
+	res.render("main/test/signup", { layout: "signup", navdata });
 });
 
 //========================
@@ -59,7 +59,7 @@ testRouter.get("/signup", (req, res, next) => {
 
 testRouter.get("/login", (req, res, next) => {
 	let navdata = { language: "English" };
-	res.render("main/test/empty", { layout: "login", navdata });
+	res.render("main/test/login", { layout: "login", navdata });
 });
 
 //========================

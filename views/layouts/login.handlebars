@@ -20,29 +20,7 @@
 	</head>
 
 	<body {{#if (isEqual navdata.language "English")}}dir="ltr"{{else}}dir="rtl"{{/if}}>
-		<section class="container loginForm">
-			<header>{{#if (isEqual navdata.language "English")}}Login{{else}}تسجيل الدخول{{/if}}</header>
-
-			<form action="/login" class="form" id="form" method="post">
-				<div class="input-box email">
-					<label>{{#if (isEqual navdata.language "English")}}Email{{else}}بريد إلكتروني{{/if}}</label>
-					<input type="text" id="email" placeholder="{{#if (isEqual navdata.language "English")}}Enter your Email{{else}}ادخل البريد إلكتروني{{/if}}" name="email" />
-				</div>
-
-				<div class="input-box password">
-					<label for="password">{{#if (isEqual navdata.language "English")}}Password{{else}}كلمة المرور{{/if}}</label>
-					<input type="password" id="password" placeholder="{{#if (isEqual navdata.language "English")}}Enter your Password{{else}}ادخل كلمة المرور{{/if}}" name="password" />
-					<i id="pass-toggle-btn" class="fa-solid fa-eye"></i>
-				</div>
-				
-				<button type="submit">{{#if (isEqual navdata.language "English")}}Login{{else}}تسجيل الدخول{{/if}}</button>
-			</form>
-
-			<p class="loginSwitch">{{#if (isEqual navdata.language "English")}}Don't have an Account?{{else}}ليس لديك حساب؟{{/if}}
-				<a href="/signup">{{#if (isEqual navdata.language "English")}}Signup{{else}}اشترك{{/if}}</a></p>
-		</section>
-
-		{{> login_signup/loginScript}}
+		{{{body}}}
 	</body>
 </html>
 

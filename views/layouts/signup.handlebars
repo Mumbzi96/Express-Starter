@@ -1,160 +1,27 @@
-{{> login_signup/signupCSS}}
+<html>
+	<head>
+		<meta charset='UTF-8' />
+		<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+		<meta
+			name='viewport'
+			content='width=device-width, initial-scale=1, shrink-to-fit=no'
+		/>
+		<link rel='icon' type='image/png' href='' />
+		<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<title>{{title}}</title>
 
-<section class="container">
-    <header>{{#if (isEqual navdata.language "English")}}Sign Up{{else}}اشتراك{{/if}}</header>
-    <form action="/signup" class="form" id="form" method="post">
-        <div class="form1">
-            <div class="column">
-                <div class="input-box">
-                    <label>{{#if (isEqual navdata.language "English")}}Full Name (English){{else}}الاسم الكامل (الإنجليزية){{/if}}</label><span style="color: red">*</span>
-                    <input type="text" placeholder="{{#if (isEqual navdata.language "English")}}Enter full name in English{{else}}أدخل الاسم الكامل باللغة الإنجليزية{{/if}}" name="name" id="name"/>
-                </div>
+		<!-- Font Awesome Icons -->
+		<script
+			src='https://kit.fontawesome.com/d40b60d37f.js'
+			crossorigin='anonymous'
+		></script>
+    {{> login_signup/signupCSS}}
+	</head>
 
-                <div class="input-box">
-                    <label>{{#if (isEqual navdata.language "English")}}Full Name (Arabic){{else}}الاسم الكامل (عربي){{/if}}</label>
-                    <input type="text" placeholder="{{#if (isEqual navdata.language "English")}}Enter full name in Arabic{{else}}أدخل الاسم الكامل باللغة العربية{{/if}}" name="arabicName"  id="arabicName"/>
-                </div>
-            </div>
-
-            <div class="column">
-                <div class="select-box">
-                    <label>{{#if (isEqual navdata.language "English")}}Title{{else}}اللقب{{/if}}</label><span style="color: red">*</span>
-                    <select name="title" id="title">
-                        <option disabled selected>{{#if (isEqual navdata.language "English")}}Select title{{else}}اختر اللقب{{/if}}</option>
-                        <option value="Mr.">{{#if (isEqual navdata.language "English")}}Mr.{{else}}السيد{{/if}}</option>
-                        <option value="Mrs.">{{#if (isEqual navdata.language "English")}}Mrs.{{else}}السيدة{{/if}}</option>
-                    </select>
-                </div>
-
-                <div class="select-box">
-                    <label>{{#if (isEqual navdata.language "English")}}Gender{{else}}الجنس{{/if}}</label><span style="color: red">*</span>
-                    <select name="gender" id="gender">
-                        <option disabled selected value="">{{#if (isEqual navdata.language "English")}}Select gender{{else}}اختر الجنس{{/if}}</option>
-                        <option value="male">{{#if (isEqual navdata.language "English")}}Male{{else}}ذكر{{/if}}</option>
-                        <option value="female">{{#if (isEqual navdata.language "English")}}Female{{else}}أنثى{{/if}}</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="column">
-                <div class="select-box">
-                    <label>{{#if (isEqual navdata.language "English")}}Role{{else}}الدور{{/if}}</label><span style="color: red">*</span>
-                    <select name="role" id="role">
-                        <option disabled selected value="">{{#if (isEqual navdata.language "English")}}Select role{{else}}اختر الدور{{/if}}</option>
-                        {{#each roles as | role key |}}
-                        <option value="{{role._id}}">{{role.name}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-
-                <div class="input-box"><span style="color: red">*</span>
-                    <label>{{#if (isEqual navdata.language "English")}}Email Address{{else}}عنوان البريد الإلكتروني{{/if}}</label>
-                    <input type="text" placeholder="{{#if (isEqual navdata.language "English")}}Enter email address{{else}}أدخل عنوان البريد الالكتروني{{/if}}" name="email"  id="email"/>
-                </div>
-            </div>
-
-            <div class="column">
-                <div class="input-box password">
-                    <label>{{#if (isEqual navdata.language "English")}}Password{{else}}كلمة المرور{{/if}}</label><span style="color: red">*</span>
-                    <input type="password" placeholder="{{#if (isEqual navdata.language "English")}}Enter Password{{else}}أدخل كلمة المرور{{/if}}" name="password"  id="password" />
-                    <i id="pass-toggle-btn" class="fa-solid fa-eye"></i>
-                </div>
-                <div class="input-box password">
-                    <label>{{#if (isEqual navdata.language "English")}}Confirm Password{{else}}تأكيد كلمة المرور{{/if}}</label><span style="color: red">*</span>
-                    <input type="password" placeholder="{{#if (isEqual navdata.language "English")}}Enter Confirm Password{{else}}أدخل تأكيد كلمة المرور{{/if}}" name="confirmPassword"  id="confirmPassword"/>
-                    <i id="pass-toggle-confirm-btn" class="fa-solid fa-eye"></i>
-                </div>
-            </div>
-
-            <div class="column">
-                <div class="select-box">
-                    <label>{{#if (isEqual navdata.language "English")}}Major Area{{else}}مجال الدراسة{{/if}}</label><span style="color: red">*</span>
-                    <select name="major" id="major">
-                        <option disabled selected value="">{{#if (isEqual navdata.language "English")}}Select major{{else}}حدد المجال{{/if}}</option>
-                        {{#each majors as | major key |}}
-                        <option value="{{major._id}}">{{major.name}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-
-                <div class="select-box">
-                    <label>{{#if (isEqual navdata.language "English")}}Specialization{{else}}التخصص{{/if}}</label>
-                    <select name="specialization" id="specialization">
-                        <option disabled selected value="">{{#if (isEqual navdata.language "English")}}Select specialization{{else}}اختر التخصص{{/if}}</option>
-                        {{#each specializations as | specialization key |}}
-                        <option value="{{specialization._id}}">{{specialization.name}}</option>
-                        {{/each}}
-                    </select>
-                </div>  
-            </div>
-
-            <button class="nextBtn">
-                <span class="btnText">{{#if (isEqual navdata.language "English")}}Next{{else}}التالي{{/if}}</span>
-                <i class="uil uil-navigator"></i>
-            </button>
-        </div>
-
-        <div class="form2">
-            <div class="column">
-                <div class="input-box">
-                    <label>{{#if (isEqual navdata.language "English")}}ORCID{{else}}ORCID{{/if}}</label>
-                    <input type="text" placeholder="{{#if (isEqual navdata.language "English")}}Enter ORCID{{else}}ادخل ORCID{{/if}}" name="orcid"  id="orcid"/>
-                </div>
-            </div>
-            
-            <div class="input-box">
-                <div class="column">
-                    <div class="select-box">
-                        <label>{{#if (isEqual navdata.language "English")}}Country{{else}}الدولة{{/if}}</label><span style="color: red">*</span>
-                        <select name="country" id="country">
-                            <option disabled selected value="">{{#if (isEqual navdata.language "English")}}Select your Country{{else}}اختر بلدك{{/if}}</option>
-                            {{#each countries as |country key|}}
-                            {{#unless (isEqual key "IL")}}
-                            <option value="{{key}}">{{country.name}}</option>
-                            {{/unless}}
-                            {{/each}}
-                        </select>
-                    </div>
-
-                    <div class="input-box">
-                        <label>{{#if (isEqual navdata.language "English")}}City{{else}}المدينة{{/if}}</label><span style="color: red">*</span>
-                        <input type="text" placeholder="{{#if (isEqual navdata.language "English")}}Enter your City{{else}}أدخل مدينتك{{/if}}" name="city" id="city"/>
-                    </div>
-
-                    <div class="input-box">
-                        <label>{{#if (isEqual navdata.language "English")}}ZIP Code{{else}}الرمز البريدي{{/if}}</label><span style="color: red">*</span>
-                        <input type="text" placeholder="{{#if (isEqual navdata.language "English")}}Enter ZIP Code{{else}}أدخل الرمز البريدي{{/if}}" name="zipCode" id="zipCode"/>
-                    </div>
-                </div>
-                <div class="input-box">
-                    <label>{{#if (isEqual navdata.language "English")}}Address{{else}}العنوان{{/if}}</label><span style="color: red">*</span>
-                    <input type="text" placeholder="{{#if (isEqual navdata.language "English")}}Enter address{{else}}أدخل العنوان{{/if}}" name="address1" id="address1"/>
-                    <label for=""></label>
-                    <input type="text" placeholder="{{#if (isEqual navdata.language "English")}}Enter address{{else}}أدخل العنوان{{/if}}" name="address2"/>
-                </div>
-            </div>
-
-            <div class="input-box">
-                <label>{{#if (isEqual navdata.language "English")}}Affiliation{{else}}الانتساب{{/if}}</label><span style="color: red">*</span>
-                <input type="text" placeholder="{{#if (isEqual navdata.language "English")}}Enter affiliation{{else}}أدخل الانتساب{{/if}}" name="affiliation" id="affiliation"/>
-            </div>
+	<body {{#if (isEqual navdata.language "English")}}dir="ltr"{{else}}dir="rtl"{{/if}}>
+		{{{body}}}
+	</body>
+</html>
 
 
-
-            <div class="buttonDiv">
-                <button class="backBtn">
-                    <i class="uil uil-navigator"></i>
-                    <span class="btnText">{{#if (isEqual navdata.language "English")}}Back{{else}}السابق{{/if}}</span>
-                </button>
-                                
-                <button class="sumbit" onclick="submitForm()">
-                    <span class="btnText">{{#if (isEqual navdata.language "English")}}Submit{{else}}تقديم{{/if}}</span>
-                    <i class="uil uil-navigator"></i>
-                </button>
-            </div>
-        </div>
-    </form>
-    <p class="loginSwitch">{{#if (isEqual navdata.language "English")}}Already have an Account? {{else}}هل لديك حساب؟ {{/if}}<a href="/login">{{#if (isEqual navdata.language "English")}}Login{{else}}تسجيل الدخول{{/if}}</a></p>
-</section>
-
-{{> login_signup/signupScript}}
