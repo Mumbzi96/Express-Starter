@@ -1,0 +1,50 @@
+<script>
+    document.getElementById('applicationType').addEventListener('change', function () {
+        let paperDiv = document.getElementById('paymentTrackPaper');
+        let electronicDiv = document.getElementById('paymentTrackElectronic');
+
+        // Hide both divs initially
+        paperDiv.style.display = 'none';
+        electronicDiv.style.display = 'none';
+
+        // Display the selected div based on the application type
+        if (this.value === 'Paper') {
+            paperDiv.style.display = 'block';
+        } else if (this.value === 'Electronic') {
+            electronicDiv.style.display = 'block';
+        }
+    });
+
+    let form = document.getElementById("researchForm")
+    let elements = Array.from(form.elements)
+    elements = elements.filter(element => { return (element.type != 'submit') })
+
+    //front end validation for the form
+    form.addEventListener('submit', event => {
+        let valid = true;
+        let counter = 0;
+        event.preventDefault()
+
+        // Name, Number, Deadline and TaskList validation and send message to fill all information
+        elements.forEach(element => {
+            if (element.value.trim() == "") {
+                valid = valid && false;
+                document.getElementById('error').innerHTML = 'All Fields are Required'
+                document.getElementById('error').style.backgroundColor = 'rgba(255, 0, 0, 0.7)'
+
+            } else {
+                valid = valid && true;
+            }
+        })
+
+        if (valid) {
+            form.submit()
+        }
+    })
+
+    // Validation Message
+    if ('{{errorMessage}}') {
+        document.getElementById('error').innerHTML = '{{errorMessage}}'
+        document.getElementById('error').style.backgroundColor = 'rgba(255, 0, 0, 0.7)'
+    }
+</script>
