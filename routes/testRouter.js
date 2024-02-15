@@ -11,7 +11,17 @@ const testRouter = express.Router();
 testRouter.get("/", (req, res, next) => {
 	let navdata = { language: "English" };
 
-	res.render("main/home", {});
+	res.render("main/home", {navdata});
+});
+
+//========================
+//          Settings
+//========================
+
+testRouter.get("/settings", (req, res, next) => {
+	let navdata = { language: "English" };
+
+	res.render("main/test/settings", {navdata});
 });
 
 //========================
