@@ -1,0 +1,119 @@
+<script>
+    //a function to search in the table and filter all the tables
+    const search = () => {
+        let input, filter, table, tr, td, txtValue, counter;
+        input = document.getElementById("search")
+        filter = input.value.toUpperCase();
+        table = document.getElementsByTagName('table')[0]
+        tbody = table.getElementsByTagName('tbody')[0]
+        for(let i=0; i<tbody.getElementsByTagName('tr').length;i++){
+            tr = tbody.getElementsByTagName('tr')[i]
+
+            counter = 0;
+            for(let j=0; j<tr.getElementsByTagName('td').length-3;j++){
+                td = tr.getElementsByTagName('td')[j]
+                txtValue = td.value || td.innerText
+                
+                if(txtValue.toUpperCase().indexOf(filter)>-1){
+                    counter ++;
+                }
+            }
+            if(counter>0){
+                tr.style.display = ""
+            }else{
+                tr.style.display = "none";
+            }
+        }
+    }
+
+//a function when the asc pressed changed to desc and visa versa
+/*const order = ()=>{
+    let button = document.getElementById('changeButton')
+    if(button.innerText === 'asc'){
+        button.innerText = 'desc'
+    }else{
+        button.innerText = 'asc'
+    }
+}
+
+//
+const Tables = document.getElementsByTagName('table')
+//take a default copy of the table
+const defaultList = [...Array.from(Tables)]
+//a sort function to sort the tables
+const sort = ()=>{
+    let order;
+    if(document.getElementById('changeButton').innerText == 'asc'){
+        order = 1;
+    }else{
+        order = -1
+    }
+
+    let selectedOption = document.getElementById('sortList').value
+    const div = document.getElementById('content')
+    //default list
+    if(selectedOption === 'default'){
+        div.append(...defaultList)
+        button.style.display = "none";
+    //sort using name
+    }else if(selectedOption === "name"){
+        button.style.display = "";
+        const table = Array.from(Tables).sort((a,b)=>{
+        let first = a.getElementsByTagName('tr')[0].getElementsByTagName('td')[0].textContent.trim().toLocaleLowerCase()
+        let second = b.getElementsByTagName('tr')[0].getElementsByTagName('td')[0].textContent.trim().toLocaleLowerCase()
+        return second > first ? -1*order : 1*order
+        })
+        div.append(...table)
+    //sort using deadline
+    }else if(selectedOption === "deadline"){
+        button.style.display = "";
+        const table = Array.from(Tables).sort((a,b)=>{
+        let first = a.getElementsByTagName('tr')[2].getElementsByTagName('td')[0].textContent.trim().toLocaleLowerCase()
+        let second = b.getElementsByTagName('tr')[2].getElementsByTagName('td')[0].textContent.trim().toLocaleLowerCase()
+        return second > first ? -1*order : 1*order
+        })
+        div.append(...table)
+    //sort using leader
+    }else if(selectedOption === "leader"){
+        button.style.display = "";
+        const table = Array.from(Tables).sort((a,b)=>{
+        let first = a.getElementsByTagName('tr')[4].getElementsByTagName('td')[0].textContent.trim().toLocaleLowerCase()
+        let second = b.getElementsByTagName('tr')[4].getElementsByTagName('td')[0].textContent.trim().toLocaleLowerCase()
+        return second > first ? -1*order : 1*order
+        })
+        div.append(...table)
+    }
+}
+
+let selectedOption = document.getElementById('sortList').value
+let button = document.getElementById('changeButton')
+if(selectedOption === 'default'){
+    button.style.display = "none";
+}*/
+
+    // Confirm for Deleting Research
+    const deleteConfirm = (id) => {
+        let deleteButton = document.getElementById(`del${id}`)
+        let message = language === "English" ? 'Are You Sure you want to delete this research?' : "هل أنت متأكد أنك تريد حذف هذا البحث؟"
+        if(confirm("هل أنت متأكد أنك تريد حذف هذا البحث؟")){
+            location.href = `/researches/delete/${id}`
+        }
+    }
+
+    // Confirm for Archive Research
+    const archiveConfirm = (id) => {
+        let archiveButton = document.getElementById(`archive${id}`)
+        let message = language === "English" ? 'Are You Sure you want to archive this research?' : "هل أنت متأكد أنك تريد أرشفة هذا البحث؟"
+        if(confirm(message)){
+            location.href = `/researches/archive/${id}`
+        }
+    }
+
+    if("{{alert}}"){
+        document.getElementById('error').style.backgroundColor = 'rgba(255, 0, 0, 0.7)'
+        setTimeout(() => {
+            document.getElementById('error').style.display= 'none';
+        }, 5000);
+    }
+
+</script>

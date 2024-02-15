@@ -10,8 +10,126 @@ const testRouter = express.Router();
 
 testRouter.get("/", (req, res, next) => {
 	let navdata = { language: "English" };
-	
-	res.render("main/test/test", {layout:"signup", navdata });
+	let researches = [
+		{
+			_id: "1",
+			initialStatus: "pending",
+			inProcessStatus: "declined",
+			payment: {
+				type: "Quantitative",
+				trackSpeed: "Fast Track"
+			},
+			title: "The Impact of Global Warming",
+			userID: {
+				username: "researcher1"
+			},
+			committee: [
+				{
+					committeeID: {
+						username: "committeeMember1"
+					}
+				},
+				{
+					committeeID: {
+						username: "committeeMember2"
+					}
+				}
+			],
+			comments: [
+				{
+					committeeID: {
+						fullName: "Dr. Smith"
+					},
+					reason: "More detailed analysis required in section 4."
+				}
+			],
+			assistant: {
+				checkedResearch: true,
+				assistantCode: {
+					username: "assistantAdmin1"
+				}
+			}
+		},
+		{
+			_id: "2",
+			initialStatus: "approved",
+			inProcessStatus: "in progress",
+			payment: {
+				type: "Qualitative",
+				trackSpeed: "Standard"
+			},
+			title: "Social Media and Mental Health",
+			userID: {
+				username: "researcher2"
+			},
+			committee: [
+				{
+					committeeID: {
+						username: "committeeMember3"
+					}
+				}
+			],
+			comments: [
+				{
+					committeeID: {
+						fullName: "Professor Johnson"
+					},
+					reason: "Consider expanding the survey demographic."
+				}
+			],
+			assistant: {
+				checkedResearch: false,
+				assistantCode: {
+					username: "assistantAdmin2"
+				}
+			}
+		},
+		{
+			_id: "3",
+			initialStatus: "completed",
+			inProcessStatus: "approved",
+			payment: {
+				type: "Mixed Methods",
+				trackSpeed: "Fast Track"
+			},
+			title: "Innovations in Renewable Energy",
+			userID: {
+				username: "researcher3"
+			},
+			committee: [
+				{
+					committeeID: {
+						username: "committeeMember4"
+					}
+				},
+				{
+					committeeID: {
+						username: "committeeMember5"
+					}
+				},
+				{
+					committeeID: {
+						username: "committeeMember6"
+					}
+				}
+			],
+			comments: [
+				{
+					committeeID: {
+						fullName: "Dr. Emily"
+					},
+					reason: "Outstanding research work. Consider publishing in a high-impact journal."
+				}
+			],
+			assistant: {
+				checkedResearch: true,
+				assistantCode: {
+					username: "assistantAdmin3"
+				}
+			}
+		}
+	];
+	res.render("main/test/tableList", { navdata, researches, message:'hello darkness my old friend' });
 });
 
 //========================
@@ -21,7 +139,7 @@ testRouter.get("/", (req, res, next) => {
 testRouter.get("/signup", (req, res, next) => {
 	let navdata = { language: "English" };
 	
-	res.render("main/test/test", {layout:"signup", navdata });
+	res.render("main/test/empty", {layout:"signup", navdata });
 });
 
 //========================
@@ -30,7 +148,7 @@ testRouter.get("/signup", (req, res, next) => {
 
 testRouter.get("/login", (req, res, next) => {
 	let navdata = { language: "English" };
-	res.render("main/test/login", {layout:"login", navdata });
+	res.render("main/test/empty", {layout:"login", navdata });
 });
 
 //========================
@@ -77,6 +195,129 @@ testRouter.get("/cards", (req, res, next) => {
 	res.render("main/test/cardsList", { navdata, users });
 });
 
+testRouter.get("/table", (req, res, next) => {
+	let navdata = { language: "English" };
+	let researches = [
+		{
+			_id: "1",
+			initialStatus: "pending",
+			inProcessStatus: "declined",
+			payment: {
+				type: "Quantitative",
+				trackSpeed: "Fast Track"
+			},
+			title: "The Impact of Global Warming",
+			userID: {
+				username: "researcher1"
+			},
+			committee: [
+				{
+					committeeID: {
+						username: "committeeMember1"
+					}
+				},
+				{
+					committeeID: {
+						username: "committeeMember2"
+					}
+				}
+			],
+			comments: [
+				{
+					committeeID: {
+						fullName: "Dr. Smith"
+					},
+					reason: "More detailed analysis required in section 4."
+				}
+			],
+			assistant: {
+				checkedResearch: true,
+				assistantCode: {
+					username: "assistantAdmin1"
+				}
+			}
+		},
+		{
+			_id: "2",
+			initialStatus: "approved",
+			inProcessStatus: "in progress",
+			payment: {
+				type: "Qualitative",
+				trackSpeed: "Standard"
+			},
+			title: "Social Media and Mental Health",
+			userID: {
+				username: "researcher2"
+			},
+			committee: [
+				{
+					committeeID: {
+						username: "committeeMember3"
+					}
+				}
+			],
+			comments: [
+				{
+					committeeID: {
+						fullName: "Professor Johnson"
+					},
+					reason: "Consider expanding the survey demographic."
+				}
+			],
+			assistant: {
+				checkedResearch: false,
+				assistantCode: {
+					username: "assistantAdmin2"
+				}
+			}
+		},
+		{
+			_id: "3",
+			initialStatus: "completed",
+			inProcessStatus: "approved",
+			payment: {
+				type: "Mixed Methods",
+				trackSpeed: "Fast Track"
+			},
+			title: "Innovations in Renewable Energy",
+			userID: {
+				username: "researcher3"
+			},
+			committee: [
+				{
+					committeeID: {
+						username: "committeeMember4"
+					}
+				},
+				{
+					committeeID: {
+						username: "committeeMember5"
+					}
+				},
+				{
+					committeeID: {
+						username: "committeeMember6"
+					}
+				}
+			],
+			comments: [
+				{
+					committeeID: {
+						fullName: "Dr. Emily"
+					},
+					reason: "Outstanding research work. Consider publishing in a high-impact journal."
+				}
+			],
+			assistant: {
+				checkedResearch: true,
+				assistantCode: {
+					username: "assistantAdmin3"
+				}
+			}
+		}
+	];
+	res.render("main/test/tableList", { navdata, researches, message:'hello darkness my old friend' });
+});
 //========================
 //          Exports
 //========================

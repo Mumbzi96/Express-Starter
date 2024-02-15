@@ -127,3 +127,56 @@
         }
     }
 </style>
+
+<div class="toast">
+    <div class="toast-content">
+        <i class="fas fa-solid fa-check check"></i>
+        <div class="message">
+            <span class="text text-1">{{#if (isEqual navdata.language "English")}}Success{{else}}نجاح{{/if}}</span>
+            <span class="text text-2">{{message}}</span>
+        </div>
+    </div>
+    <i class="fa-solid fa-xmark messageClose"></i>
+    <div class="progress"></div>
+</div>
+
+<script>
+    let message = "{{message}}"
+
+    if(performance.navigation.type === 2){ 
+        message = ''
+    }
+    // Flash message with timer 5 sec
+    const toast = document.querySelector(".toast")
+    closeIcon = document.querySelector(".messageClose"),
+    progress = document.querySelector(".progress");
+
+    let timer1, timer2;
+    document.addEventListener('DOMContentLoaded', function () {
+        if(message){
+            setTimeout(function() {
+                toast.classList.add("active");
+                progress.classList.add("active");
+
+                timer1 = setTimeout(() => {
+                    toast.classList.remove("active");
+                }, 5000); //1s = 1000 milliseconds
+
+                timer2 = setTimeout(() => {
+                    progress.classList.remove("active");
+                }, 5300);
+                }, 150);
+        }
+
+        closeIcon.addEventListener("click", () => {
+            toast.classList.remove("active");
+            setTimeout(() => {
+            progress.classList.remove("active");
+            }, 300);
+
+            clearTimeout(timer1);
+            clearTimeout(timer2);
+        });
+        
+    })
+</script>

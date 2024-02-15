@@ -1,8 +1,8 @@
-const handlebars = require('express-handlebars');
-const moment = require('moment');
+const handlebars = require("express-handlebars");
+const moment = require("moment");
 
 hbs = handlebars.create({
-	defaultLayout: 'main',
+	defaultLayout: "main",
 	runtimeOptions: {
 		allowProtoPropertiesByDefault: true,
 		allowProtoMethodsByDefault: true,
@@ -14,6 +14,10 @@ hbs = handlebars.create({
 			} else {
 				return false;
 			}
+		},
+		isEmptyArray: function (arr) {
+			if (arr && arr.length > 0) return false;
+			else return true;
 		},
 	},
 });
