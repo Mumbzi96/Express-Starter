@@ -4,6 +4,10 @@
 const express = require("express");
 const testRouter = express.Router();
 
+const Group = require("../database/mongo/schemas/groups");
+const User = require("../database/mongo/schemas/users");
+
+
 //========================
 //          Main
 //========================
@@ -11,6 +15,9 @@ const testRouter = express.Router();
 testRouter.get("/", (req, res, next) => {
 	let navdata = { language: "English" };
 
+	//
+
+	//
 	res.render("main/home", { navdata });
 });
 

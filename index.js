@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 const moment = require("moment");
 const path = require("path");
 const session = require("express-session");
+let mongoose = require("mongoose");
 
 // Routes
 const testRouter = require("./routes/testRouter");
@@ -35,6 +36,24 @@ let PORT = process.env.PORT || 3000; // This uses the port from the configuratio
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 app.set("views", "./views");
+
+// ====================================
+//             Database
+// ====================================
+if (process.env.DATABASE.toLowerCase() == "mongo") {
+	mongoose
+		.connect(process.env.MONGO_URI + process.env.DATABASE_NAME)
+		.then(() => {
+			console.log("Connected to MongoDB");
+			const { checkUsers } = require("./database/mongo/helpers/users");
+			const { checkGroups } = require("./database/mongo/helpers/groups");
+			checkGroups();
+			checkUsers();
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+}
 
 // ====================================
 //             Middleware
@@ -75,7 +94,7 @@ app.use(async (err, req, res, next) => {
 	console.log(err);
 	res.render("main/test/error", {
 		message: "An error has occured",
-		code:404,
+		code: 404,
 		err,
 	});
 });
