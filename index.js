@@ -53,6 +53,11 @@ if (process.env.DATABASE.toLowerCase() == "mongo") {
 		.catch((err) => {
 			console.log(err);
 		});
+} else if (process.env.DATABASE.toLowerCase() == "mssql") {
+	// Project-made Modules
+	const { connectToDatabases } = require("./database/sql/tablesSetup.js");
+	// Connect to DB
+	connectToDatabases();
 }
 
 // ====================================
