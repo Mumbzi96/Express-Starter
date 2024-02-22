@@ -3,6 +3,7 @@
 // ====================================
 const express = require("express");
 const mainRouter = express.Router();
+const dotenv = require("dotenv");
 
 //Encryption
 const bcrypt = require("bcryptjs");
@@ -10,6 +11,15 @@ const bcrypt = require("bcryptjs");
 // MongoDB
 const Group = require("../database/mongo/schemas/groups");
 const User = require("../database/mongo/schemas/users");
+
+const { getOne } = require("../database/sql/methods/jointMethods");
+
+// ====================================
+//             Configuration
+// ====================================
+dotenv.config({
+	path: "./config/config.env",
+});
 
 //========================
 //          Main
@@ -42,8 +52,13 @@ mainRouter.post("/login", async (req, res, next) => {
 	let _email = req.body.email;
 	let _password = req.body.password;
 
-	// Find user in database
-	let userDB = await User.findOne({ email: _email }).populate("group").exec();
+	// Find user based on database
+	let userDB;
+	if (process.env.DATABASE.toLowerCase() == "mongo")
+		userDB = await User.findOne({ email: _email }).populate("group").exec();
+	else if (process.env.DATABASE.toLowerCase() == "mssql") {
+		userDB = await getOne("Users", "email", _email);
+	}
 
 	// Check password of username exists
 	if (userDB) {
@@ -79,8 +94,8 @@ mainRouter.post("/login", async (req, res, next) => {
 });
 
 mainRouter.get("/logout", (req, res, next) => {
-    req.session.destroy();
-    res.redirect("/login");
+	req.session.destroy();
+	res.redirect("/login");
 });
 
 //========================

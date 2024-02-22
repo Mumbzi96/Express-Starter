@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const session = require("express-session");
 const MemoryStore = require("memorystore")(session);
 const MongoStore = require("connect-mongo");
+const MSSQLStore = require("connect-mssql-v2");
 
 // ====================================
 //             Configuration
@@ -27,6 +28,7 @@ if (process.env.DATABASE.toLowerCase() == "mongo") {
 		mongoUrl: process.env.MONGO_URI + process.env.DATABASE_NAME,
 	});
 } else if (process.env.DATABASE.toLowerCase() == "mssql") {
+	console.log("MSSQL");
 	// setup config
 	const config = {
 		user: process.env.DATABASEUSERNAME,
