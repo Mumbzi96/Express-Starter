@@ -7,6 +7,7 @@ const moment = require("moment");
 const path = require("path");
 const session = require("express-session");
 let mongoose = require("mongoose");
+const MongoStore = require("connect-mongo");
 
 // Routes
 const testRouter = require("./routes/testRouter");
@@ -61,11 +62,13 @@ if (process.env.DATABASE.toLowerCase() == "mongo") {
 }
 
 // ====================================
+//             Session
+// ====================================
+app.use(session(sessionOptions));
+
+// ====================================
 //             Middleware
 // ====================================
-
-// Sessions
-app.use(session(sessionOptions));
 
 // Body parser
 app.use(express.json()); //To use body parser for JSON
@@ -89,9 +92,16 @@ const reqLog = (req, res, next) => {
 // Static
 app.use(express.static(path.join(__dirname, "/public")));
 
+// Logged in
+const isLoggedIn = (req, res, next) => {
+	if (req.session.isLoggedIn) {
+		next();
+	} else res.redirect("/login");
+};
+
 // Seperate Routes
 app.use("/test", testRouter);
-app.use("/users", usersRouter);
+app.use("/users", isLoggedIn, usersRouter);
 app.use("/", mainRouter);
 
 // Error handling

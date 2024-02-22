@@ -26,6 +26,7 @@ async function connectToDatabases() {
 	// Connect to SQL Database
 	connectSQL()
 		.then(async () => {
+			let sessions = await CreateTableSessions();
 			let groups = await CreateTableGroups();
 			let users = await CreateTableUsers();
 		})
@@ -48,6 +49,52 @@ async function connectSQL() {
 // ====================================
 //       	Table Creation
 // ====================================
+
+async function CreateTableSessions() {
+	let connection = await createConnection();
+	return new Promise((resolve, reject) => {
+		connection.connect((err) => {
+			if (err) reject(err);
+			// Statement setup
+			let statement = `IF OBJECT_ID('Sessions') IS NULL
+			BEGIN
+				CREATE TABLE [dbo].[Sessions](
+					id INT NOT NULL IDENTITY,
+					[sid] [nvarchar](MAX) NOT NULL,
+					[session] [nvarchar](MAX) NOT NULL,
+					[expires] [datetime] NOT NULL,
+					CONSTRAINT [PK_Sessions] PRIMARY KEY CLUSTERED 
+					(
+						[id] ASC
+					)
+				);
+			END
+			ELSE
+			BEGIN
+				PRINT 'Sessions Table exists.'
+			END`;
+
+			// Request setup
+			let request = new Request(statement, function (err, rowCount, rows) {
+				if (err) {
+					connection.close();
+					console.log("The error happened create table: sessions'. " + err);
+					reject(err);
+				} else {
+				}
+			});
+
+			// Close the connection after the final event emitted by the request, after the callback passes
+			request.on("requestCompleted", function () {
+				connection.close();
+				console.log("Sessions table created or already exists");
+				resolve("Done");
+			});
+			connection.execSql(request);
+		});
+	});
+
+}
 
 async function CreateTableUsers() {
 	let connection = await createConnection();
