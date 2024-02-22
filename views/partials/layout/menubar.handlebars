@@ -1,20 +1,14 @@
 <nav class="menubar">
-    {{#unless navdata.isLogin}}
     <a href="/" class="logo-details">
         <div><i class="fa-solid fa-building-columns icon"></i></div>
         <div class="logo_name">Client Name</div>
     </a>
-    {{/unless}}
 
     {{#if navdata.isLogin}}
     {{> component/notification}}
     {{/if}}
     <div class="menubar_left">
-        {{#if navdata.isLogin}}
             <a href="/logout" class="logout">{{#if (isEqual navdata.language "English")}}Logout{{else}}تسجيل خروج{{/if}}</a> 
-        {{else}}
-            <a href="/login" class="login">{{#if (isEqual navdata.language "English")}}Login{{else}}تسجيل الدخول{{/if}}</a>
-        {{/if}}
 
         <div class="dropdown" id="dropdown" tab-index="0">
               <button type="submit" id="dropdown-btn" onmousedown="openLanguageList()"></button>
