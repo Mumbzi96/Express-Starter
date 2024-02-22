@@ -32,17 +32,17 @@ usersRouter.get("/", async (req, res, next) => {
 	// Get all users
 	if (process.env.DATABASE.toLowerCase() == "mongo") {
 		users = await User.find({}).populate("group").exec();
+		res.render("main/users/list", { navdata, users });
 	} else if (process.env.DATABASE.toLowerCase() == "mssql") {
-		getAll("users")
+		getAll("Users")
 			.then((data) => {
 				users = data;
+				res.render("main/users/list", { navdata, users });
 			})
 			.catch((err) => {
 				next(err);
 			});
 	}
-
-	res.render("main/users/list", { navdata,users });
 });
 //========================
 //          Exports

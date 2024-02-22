@@ -15,8 +15,7 @@
                 <h1>{{#if (isEqual navdata.language "English")}}My Researches{{else}}أبحاثي{{/if}}</h1>
                 <div class="error"><span id="error">{{alert}}</span></div>
                 <div class="input-group">
-                    <input type="search" id="search" onkeyup='search()' placeholder="{{#if (isEqual navdata.language "
-                        English")}}Search Data...{{else}}البحث...{{/if}}">
+                    <input type="search" id="search" onkeyup='search()' placeholder="{{#if (isEqual navdata.language 'English')}}Search...{{else}}البحث...{{/if}}">
                     <i class='bx bx-search'></i>
                 </div>
             </section>
@@ -26,10 +25,10 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>{{#if (isEqual navdata.language "English")}}Full Name{{else}}العنوان{{/if}}</th>
-                            <th>{{#if (isEqual navdata.language "English")}}Username{{else}}النوع/السرعة{{/if}}</th>
-                            <th>{{#if (isEqual navdata.language "English")}}Email{{else}}التاريخ{{/if}}</th>
-                            <th>{{#if (isEqual navdata.language "English")}}Group{{else}}عرض{{/if}}</th>
+                            <th>{{#if (isEqual navdata.language "English")}}Full Name{{else}}الإسم الكامل{{/if}}</th>
+                            <th>{{#if (isEqual navdata.language "English")}}Username{{else}}إسم المستخدم{{/if}}</th>
+                            <th>{{#if (isEqual navdata.language "English")}}Email{{else}}الحساب البريدي{{/if}}</th>
+                            <th>{{#if (isEqual navdata.language "English")}}Group{{else}}المجموعة{{/if}}</th>
                             <th>{{#if (isEqual navdata.language "English")}}View{{else}}تحرير{{/if}}</th>
                             {{!-- <th>{{#if (isEqual navdata.language "English")}}Delete{{else}}حذف{{/if}}</th> --}}
                             <th>{{#if (isEqual navdata.language "English")}}Delete{{else}}أرشيف{{/if}}</th>

@@ -116,7 +116,7 @@ async function CreateTableUsers() {
 			BEGIN
 				CREATE TABLE [dbo].[Users](
 					id INT NOT NULL IDENTITY,
-					[fullname] [nvarchar](100) NOT NULL,
+					[fullName] [nvarchar](100) NOT NULL,
 					[username] [nvarchar](100) NOT NULL UNIQUE,
 					[email] [nvarchar](MAX) NOT NULL,
 					[password] [nvarchar](MAX) NULL,
