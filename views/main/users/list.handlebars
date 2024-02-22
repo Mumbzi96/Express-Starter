@@ -1,0 +1,85 @@
+{{> lists/tableListCSS}}
+{{> layout/sidebar}} 
+
+<section class="home-section home-section-container">
+
+    {{!-- Flash Message --}}
+    {{> components/flashMessage/flashMessage}}
+    
+    
+    <!-- take data of lists from backend and list it in a tables -->
+    <div class="content" id="content">
+        <main class="table">
+            {{!-- Table Header --}}
+            <section class="table__header">
+                <h1>{{#if (isEqual navdata.language "English")}}My Researches{{else}}أبحاثي{{/if}}</h1>
+                <div class="error"><span id="error">{{alert}}</span></div>
+                <div class="input-group">
+                    <input type="search" id="search" onkeyup='search()' placeholder="{{#if (isEqual navdata.language "English")}}Search Data...{{else}}البحث...{{/if}}">
+                    <i class='bx bx-search'></i>
+                </div>
+            </section>
+
+            {{!-- Table Body --}}
+            <section class="table__body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>{{#if (isEqual navdata.language "English")}}Title{{else}}العنوان{{/if}}</th>
+                            <th>{{#if (isEqual navdata.language "English")}}Type/Speed{{else}}النوع/السرعة{{/if}}</th>
+                            <th>{{#if (isEqual navdata.language "English")}}Date{{else}}التاريخ{{/if}}</th>
+                            <th>{{#if (isEqual navdata.language "English")}}Show{{else}}عرض{{/if}}</th>
+                            <th>{{#if (isEqual navdata.language "English")}}Edit{{else}}تحرير{{/if}}</th>
+                            {{!-- <th>{{#if (isEqual navdata.language "English")}}Delete{{else}}حذف{{/if}}</th> --}}
+                            <th>{{#if (isEqual navdata.language "English")}}Archive{{else}}أرشيف{{/if}}</th>
+                            <th>{{#if (isEqual navdata.language "English")}}Message{{else}}رسالة{{/if}}</th>
+                            <th>{{#if (isEqual navdata.language "English")}}Upload Receipt{{else}}تحميل الفاتورة{{/if}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each researches as |research key|}}
+                            <tr id="{{research._id}}">
+                                <td>{{research.title}}</td>
+                                <td>{{#if (isEqual ../navdata.language "English")}}{{research.payment.type}} - {{research.payment.trackSpeed}}{{else}}{{paymentTypeInArabic research.payment.type}} - {{paymentSpeedInArabic research.payment.trackSpeed}}{{/if}}</td>
+                                <td>{{#if (isEqual ../navdata.language "English")}}{{research.date}}{{else}}{{formatDate research.date}}{{/if}}</td>
+                                <td><a href="/researches/{{research._id}}"><i class='bx bx-show'></i></a></td>
+                                <td>
+                                    {{#unless (isEqual research.committeeFinalDecision "declined")}}
+                                    {{#if (isEqual true true)}}
+                                    <a href="/researches/edit/{{research._id}}"><i class='bx bx-edit-alt'></i></a>
+                                    {{/if}}
+                                    {{/unless}}
+                                </td>
+                                <td>
+                                    {{!-- <a id="del{{value._id}}" onclick="deleteConfirm('{{research._id}}')" href='#'><i class='bx bx-trash'></i></a> --}}
+                                </td>
+                                <td>
+                                    <a id="archive{{value._id}}" onclick="archiveConfirm('{{research._id}}')" href='#'><i class='bx bx-archive-in'></i></a>
+                                </td>
+                                <td>
+                                    {{#if (isEqual research.inProcessStatus "declined")}}
+                                    {{#if (isEqual research.committeeFinalDecision 'pending')}}
+                                    <a href="/chat/{{research.assistant.assistantID}}"><i class='bx bx-chat'></i></a>
+                                    {{/if}}
+                                    {{/if}}
+                                </td>
+                                <td>
+                                    {{#if (isEqual research.initialStatus 'approved')}}
+                                    {{#unless research.payment.uploadReceipt}}
+                                    <a href="/researches/uploadreceipt/{{research._id}}" style="color: red;"><i class="fa-solid fa-upload"></i></a>
+                                    {{/unless}} 
+                                    {{/if}}
+                                </td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </section>
+            <a href="researches/add" class="add-anchor" type="button">+</a>
+        </main>
+
+    </div>
+
+</section>
+
+{{> lists/tableListScript}}

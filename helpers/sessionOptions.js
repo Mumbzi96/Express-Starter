@@ -24,8 +24,8 @@ dotenv.config({
 let store;
 if (process.env.DATABASE.toLowerCase() == "mongo") {
 	// Mongo
-	store = MongoStore.create({
-		mongoUrl: process.env.MONGO_URI + process.env.DATABASE_NAME,
+	store = new MemoryStore({
+		checkPeriod: 43200000, // prune expired entries every 12h
 	});
 } else if (process.env.DATABASE.toLowerCase() == "mssql") {
 	console.log("MSSQL");
@@ -54,10 +54,11 @@ if (process.env.DATABASE.toLowerCase() == "mongo") {
 
 let sessionOptions = {
 	secret: process.env.SESSION_KEY,
-	resave: false,
+	resave: true,
 	saveUninitialized: true,
 	cookie: {
-		secure: true,
+		maxAge: 1000 * 60 * 60 * 72, // Example: 72 hours
+		secure: process.env.SESSION_SECURE === "true" ? true : false,
 		// domain:,
 		// maxAge`:,
 		// secure`:true,

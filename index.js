@@ -94,6 +94,7 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 // Logged in
 const isLoggedIn = (req, res, next) => {
+	console.log(req.session);
 	if (req.session.isLoggedIn) {
 		next();
 	} else res.redirect("/login");

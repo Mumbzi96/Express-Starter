@@ -4,6 +4,7 @@
 const express = require("express");
 const mainRouter = express.Router();
 const dotenv = require("dotenv");
+const session = require("express-session");
 
 //Encryption
 const bcrypt = require("bcryptjs");
@@ -26,7 +27,7 @@ dotenv.config({
 //========================
 
 mainRouter.get("/", (req, res, next) => {
-	if (req.session && req.session.isLoggedIn) res.redirect("/home");
+	if (req.session && req.session.isLoggedIn) res.redirect("/users");
 	else res.redirect("/login");
 });
 
@@ -35,7 +36,7 @@ mainRouter.get("/", (req, res, next) => {
 // ====================================
 
 mainRouter.get("/login", async (req, res, next) => {
-	if (req.session && req.session.isLoggedIn) res.redirect("/home");
+	if (req.session && req.session.isLoggedIn) res.redirect("/users");
 	else {
 		// navdata setup
 		let navdata = { language: "English" };
@@ -66,17 +67,13 @@ mainRouter.post("/login", async (req, res, next) => {
 			.compare(_password, userDB.password)
 			.then(async (isCorrect) => {
 				// Check password
-				console.log("Password comparison result:", isCorrect);
-
 				if (isCorrect) {
-					console.log("correct");
-
 					// Check if req.session exists before setting properties
 					if (req.session) {
+
 						req.session.isLoggedIn = true;
 						req.session.user = userDB;
-						console.log("Password is correct");
-						res.json({ redirect: "home" });
+						res.json({ redirect: "users" });
 					} else {
 						console.error("req.session is undefined");
 					}
