@@ -7,13 +7,18 @@
     "dev-server": "cd server && npm run dev",
     "dev-client": "cd client && npm run dev",
     "install-modules": "npm i && cd server && npm i && cd .. && cd client && npm i",
-    "build-server":"cd server && npm run build",
-    "build-client":"cd client && npm run build",
-    "build-full":"cd server && npm run build && cd.. && cd client && npm run build"
+    "build-server": "cd server && npm run build",
+    "build-client": "cd client && npm run build",
+    "build-full": "cd server && npm run build && cd.. && cd client && npm run build"
   },
   "author": "Omar Hammoud",
   "license": "ISC",
   "dependencies": {
-    "concurrently": "^8.2.0"
+    "bcryptjs": "^3.0.2",
+    "concurrently": "^8.2.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.12.0"
   }
 }
