@@ -3,8 +3,15 @@ import Loadable from '../components/loadable';
 
 const Default = Loadable(lazy(() => import('../pages/Default')))
 
+//? Auth
+const Login = Loadable(lazy(() => import('../pages/auth/Login')))
+
 
 const Router = [
+    {
+        path: '/auth/login',
+        element: <Login />,
+    },
     {
         path: '/',
         element: <Default />,

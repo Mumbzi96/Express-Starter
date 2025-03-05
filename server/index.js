@@ -61,6 +61,7 @@ mongoose.connect(`mongodb://${process.env.MONGO_URI}/${process.env.DATABASE_NAME
 const apiPrefix = process.env.ENVIRONMENT === "dev" ? "" : "/api";
 
 app.use(`${apiPrefix}/test`, require("./routes/testRouter"));
+app.use(`${apiPrefix}/auth`, require("./routes/authRouter"));
 app.use(`${apiPrefix}/users`, require("./routes/userRouter"));
 app.use(`${apiPrefix}/`, require("./routes/mainRouter"));
 

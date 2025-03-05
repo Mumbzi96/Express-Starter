@@ -93,9 +93,6 @@ router.post("/login", loginValidation, async (req, res) => {
 		let userData = user.toObject();
 		delete userData.password;
 
-		const managedUsers = await User.find({ manager: user._id }).exec();
-		userData.isManager = managedUsers.length > 0;
-
 		const accessToken = jwt.sign(
 			{ user: userData },
 			process.env.ACCESS_TOKEN_SECRET,

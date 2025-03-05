@@ -7,7 +7,7 @@ function Default() {
 
     return (
         <div style={{ textAlign: 'center', width: size.width }}>
-            Hello World
+            Home Page
         </div>
     )
 }

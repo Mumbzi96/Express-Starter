@@ -1,6 +1,6 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, useMemo, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import jwtDecode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 const AuthContext = createContext(undefined)
 
@@ -55,9 +55,10 @@ export function AuthProvider({ children }) {
 	}, []);
   
 	const login = async (formData) => {
+		console.log("Form Data: ", formData)
 		try {
 			dispatch({ type: "SET_LOADING", payload: true });
-			const response = await fetch('/api/login', {
+			const response = await fetch('/api/auth/login', {
 				headers: {
 					'Content-Type': 'application/json'
 				},
@@ -75,6 +76,7 @@ export function AuthProvider({ children }) {
 			}
 	
 			const decoded = jwtDecode(json.token);
+			console.log("Decoded: ", decoded)
 			dispatch({
 				type: 'LOGIN',
 				payload: {
@@ -91,7 +93,7 @@ export function AuthProvider({ children }) {
   
 	const loadUser = async () => {
 		try {
-			const response = await fetch('/api/load-user', {
+			const response = await fetch('/api/auth/load-user', {
 				credentials: 'include',
 				headers: {
 					'Content-Type': 'application/json'
@@ -122,7 +124,7 @@ export function AuthProvider({ children }) {
   
 	const logout = async () => {
 		try {
-			const response = await fetch('/api/logout', {
+			const response = await fetch('/api/auth/logout', {
 				credentials: 'include',
 				headers: {
 					'Content-Type': 'application/json'
@@ -144,7 +146,6 @@ export function AuthProvider({ children }) {
 				isAuthenticated: Boolean(state.user),
 				redirectUrl,
 				login,
-				loginWithMicrosoft,
 				logout,
 				dispatch
 			}}
