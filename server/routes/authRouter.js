@@ -5,9 +5,13 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken')
+const { validationResult } = require("express-validator");
 
 //? Model
-const { User } = require("../models/UserModel")
+const { User } = require("../models/UserModel");
+
+//? Validations
+const { loginValidation } = require('../validations/authValidation');
 
 
 //? ==================================== 
@@ -67,54 +71,53 @@ router.get("/logout", (req, res) => {
 //? ==================================== 
 //?                Post
 //? ==================================== 
-router.post("/login", async (req, res) => {
-  	const { email, password } = req.body;
+router.post("/login", loginValidation, async (req, res) => {
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		return res.status(400).json({ success: false, errors: errors.array() });
+	}
 
-  	try {
-		// Find a user with the provided username
+	const { email, password } = req.body;
+
+	try {
 		const user = await User.findOne({ email }).exec();
-
-		if (user) {
-			const isPasswordValid = await bcrypt.compare(password, user.password);
-
-			let userData = user.toObject()
-      		delete userData.password
-
-			const users = await User.find({ manager: user._id }).exec();
-			userData.isManager = users.length > 0
-
-			if (isPasswordValid) {
-				const accessToken = jwt.sign(
-					{ user: userData },
-					process.env.ACCESS_TOKEN_SECRET,
-					{ expiresIn: "15m" }
-				);
-  
-				const refreshToken = jwt.sign(
-					{ user: userData },
-					process.env.REFRESH_TOKEN_SECRET,
-					{ expiresIn: "30d" }
-				);
-  
-				// Store the refresh token in an HTTP-only cookie
-				res.cookie("refreshToken", refreshToken, {
-					httpOnly: true,
-					secure: true,
-					sameSite: "strict"
-				});
-		
-				// Send access token to the frontend
-				res.status(200).json({ success: true, token: accessToken });
-			} else {
-				res.status(403).json({ success: false, passwordError: "Wrong password", });
-			}
-
-		} else {
-			res.status(403).json({ success: false, usernameError: "Wrong username. User does not exist", });
+		if (!user) {
+			return res.status(403).json({ success: false, message: "User does not exist" });
 		}
+
+		const isPasswordValid = await bcrypt.compare(password, user.password);
+		if (!isPasswordValid) {
+			return res.status(403).json({ success: false, message: "Wrong password" });
+		}
+
+		let userData = user.toObject();
+		delete userData.password;
+
+		const managedUsers = await User.find({ manager: user._id }).exec();
+		userData.isManager = managedUsers.length > 0;
+
+		const accessToken = jwt.sign(
+			{ user: userData },
+			process.env.ACCESS_TOKEN_SECRET,
+			{ expiresIn: "15m" }
+		);
+
+		const refreshToken = jwt.sign(
+			{ user: userData },
+			process.env.REFRESH_TOKEN_SECRET,
+			{ expiresIn: "30d" }
+		);
+
+		res.cookie("refreshToken", refreshToken, {
+			httpOnly: true,
+			secure: true,
+			sameSite: "strict",
+		});
+
+		res.status(200).json({ success: true, token: accessToken });
 	} catch (error) {
 		console.error("Error while authenticating:", error);
-		res.status(500).json({ success: false, err: error });
+		res.status(500).json({ success: false, error: "Internal Server Error" });
 	}
 });
 
