@@ -49,10 +49,6 @@ export function AuthProvider({ children }) {
 	const redirectUrl = useMemo(() => {
 		return location.pathname || '/';
 	}, [location.pathname]);
-
-	useEffect(() => {
-		console.log("state: ", state)
-	},[state])
   
 	useEffect(() => {
 	  	loadUser();

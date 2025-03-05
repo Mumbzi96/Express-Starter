@@ -5,11 +5,6 @@ import dotenv from 'dotenv';
 
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
-console.log("VITE_TARGET:", process.env.VITE_TARGET);
-console.log("VITE_TARGET_LIVE:", process.env.VITE_TARGET_LIVE);
-console.log("Proxy Target:", process.env.VITE_ENVIRONMENT === "dev" ? process.env.VITE_TARGET : process.env.VITE_TARGET_LIVE);
-
-
 export default defineConfig({
   base: "/",
   define: { 'process.env': {
