@@ -1,14 +1,23 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from 'path';
+import dotenv from 'dotenv';
 
-// https://vitejs.dev/config/
+dotenv.config({ path: path.resolve(__dirname, '.env') });
+
 export default defineConfig({
+  base: "/",
+  define: { 'process.env': {
+      VITE_API_URL: process.env.VITE_ENVIRONMENT == "dev" ? process.env.VITE_API_URL : process.env.VITE_API_URL_LIVE
+    },
+    _global: {},
+  },
   server: {
-    host: '0.0.0.0',
+    host: process.env.VITE_HOST,
     proxy: {
       "/api": {
         //? backend port
-        target: `http://127.0.0.1:3000/`,
+        target: process.env.VITE_ENVIRONMENT == "dev" ? process.env.VITE_TARGET : process.env.VITE_TARGET_LIVE,
 
         changeOrigin: true,
         secure: false,
@@ -16,7 +25,7 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
-    port: 5000,
+    port: Number(process.env.VITE_PORT),
   },
   plugins: [
     react(),
