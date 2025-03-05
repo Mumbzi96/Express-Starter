@@ -49,13 +49,16 @@ export function AuthProvider({ children }) {
 	const redirectUrl = useMemo(() => {
 		return location.pathname || '/';
 	}, [location.pathname]);
+
+	useEffect(() => {
+		console.log("state: ", state)
+	},[state])
   
 	useEffect(() => {
 	  	loadUser();
 	}, []);
   
 	const login = async (formData) => {
-		console.log("Form Data: ", formData)
 		try {
 			dispatch({ type: "SET_LOADING", payload: true });
 			const response = await fetch('/api/auth/login', {
@@ -76,7 +79,6 @@ export function AuthProvider({ children }) {
 			}
 	
 			const decoded = jwtDecode(json.token);
-			console.log("Decoded: ", decoded)
 			dispatch({
 				type: 'LOGIN',
 				payload: {
