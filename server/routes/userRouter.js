@@ -3,9 +3,13 @@
 //? ==================================== 
 const express = require("express");
 const router = express.Router();
+const { validationResult } = require("express-validator");
 
 //? Model
 const { User } = require("../models/UserModel");
+
+//? Validation
+const { validateUser } = require("../validations/userValidation");
 
 
 //? ==================================== 
@@ -33,7 +37,12 @@ router.get("/:id", async (req, res) => {
 //? ==================================== 
 //?                Post
 //? ==================================== 
-router.post("/", async (req, res) => {
+router.post("/", validateUser, async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ success: false, errors: errors.array() });
+    }
+  
     try {
         const { email, password, isAdmin, username } = req.body;
         const newUser = new User({ email, password, isAdmin, username });
@@ -42,7 +51,7 @@ router.post("/", async (req, res) => {
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
-});
+  });
 
 //? ==================================== 
 //?              Patch
